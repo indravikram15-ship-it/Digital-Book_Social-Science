@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Life | Chapter Tabs</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --bg1: #0a1028;
+            --bg2: #243a78;
+            --line: rgba(255, 255, 255, 0.2);
+            --accent: #84b7ff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            background: radial-gradient(circle at 45% 8%, var(--bg2) 0%, var(--bg1) 70%);
+            overflow-x: hidden;
+        }
+
+        .page {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 36px 20px 64px;
+        }
+
+        h1 {
+            margin: 0;
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            color: var(--accent);
+            letter-spacing: 0.04em;
+            text-shadow: 0 0 24px rgba(132, 183, 255, 0.35);
+        }
+
+        .subtitle {
+            text-align: center;
+            margin: 10px 0 28px;
+            opacity: 0.86;
+        }
+
+        .tabs {
+            display: grid;
+            gap: 14px;
+            max-width: 760px;
+            margin: 0 auto 20px;
+        }
+
+        .tab-btn {
+            border: 1px solid var(--line);
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0.08), rgba(132, 183, 255, 0.18));
+            color: #fff;
+            border-radius: 20px;
+            padding: 20px 22px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-align: left;
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 44px rgba(0, 0, 0, 0.35), 0 0 28px rgba(132, 183, 255, 0.2);
+        }
+
+        .tab-btn.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 1px rgba(132, 183, 255, 0.45), 0 20px 44px rgba(0, 0, 0, 0.35), 0 0 30px rgba(132, 183, 255, 0.3);
+        }
+
+        .tab-icon {
+            min-width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 2.1rem;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.38);
+            box-shadow: inset 0 -8px 16px rgba(0, 0, 0, 0.28), 0 10px 24px rgba(0, 0, 0, 0.3), 0 0 16px rgba(255, 255, 255, 0.15);
+        }
+
+        .panel {
+            display: none;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 24px;
+            background: rgba(10, 20, 42, 0.78);
+        }
+
+        .panel.active {
+            display: block;
+            box-shadow: 0 0 0 1px rgba(132, 183, 255, 0.35), 0 0 40px rgba(132, 183, 255, 0.2);
+        }
+
+        .panel h2 {
+            margin-top: 0;
+            color: var(--accent);
+            font-family: 'Cinzel', serif;
+        }
+
+        .note {
+            padding: 14px 16px;
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            background: rgba(132, 183, 255, 0.13);
+        }
+
+        .tab-label {
+            flex: 1;
+        }
+
+        .enter-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 22px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #3360b0, #84b7ff);
+            color: #060f26;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            box-shadow: 0 4px 18px rgba(132, 183, 255, 0.4), 0 0 14px rgba(132, 183, 255, 0.2);
+            white-space: nowrap;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .enter-btn:hover {
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 6px 24px rgba(132, 183, 255, 0.55), 0 0 20px rgba(132, 183, 255, 0.35);
+        }
+
+        .chatbot-fab {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 64px;
+            height: 64px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: radial-gradient(circle at 30% 30%, #ffe6a8, #ffc04d 62%, #e59225 100%);
+            box-shadow: 0 16px 28px rgba(0, 0, 0, 0.3), 0 0 26px rgba(255, 192, 77, 0.36);
+            color: #2b1c00;
+            font-size: 1.9rem;
+            cursor: pointer;
+            z-index: 20;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .chatbot-fab:hover {
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 20px 34px rgba(0, 0, 0, 0.35), 0 0 34px rgba(255, 192, 77, 0.5);
+        }
+    </style>
+    <link rel="stylesheet" href="assets/responsive.css">
+</head>
+<body>
+
+<main class="page">
+    <h1>Social Life</h1>
+    <p class="subtitle">Choose a chapter tab to begin.</p>
+
+    <section class="tabs" aria-label="Social Life chapter tabs">
+        <button class="tab-btn active" type="button" onclick="showTab('ch2', this)">
+            <span class="tab-icon" aria-hidden="true">&#x1F5F3;&#xFE0F;</span>
+            <span class="tab-label">Chapter 2: Universal Franchise and India's Electoral System</span>
+            <a class="enter-btn" href="civics_ch2.html" onclick="event.stopPropagation()">Enter &#8594;</a>
+        </button>
+        <button class="tab-btn" type="button" onclick="showTab('ch3', this)">
+            <span class="tab-icon" aria-hidden="true">&#x1F3DB;&#xFE0F;</span>
+            <span class="tab-label">Chapter 3: The Parliamentary System: Legislature and Executive</span>
+            <a class="enter-btn" href="civics_ch3.html" onclick="event.stopPropagation()">Enter &#8594;</a>
+        </button>
+    </section>
+
+    <section class="panel active" id="ch2">
+        <h2>Universal Franchise and India's Electoral System</h2>
+        <p class="note">This chapter explains voting rights, elections, and how representative democracy works in India.</p>
+    </section>
+
+    <section class="panel" id="ch3">
+        <h2>The Parliamentary System: Legislature and Executive</h2>
+        <p class="note">This chapter introduces how laws are made and how the executive runs governance within a parliamentary setup.</p>
+    </section>
+</main>
+
+<a class="chatbot-fab" href="dashboard.html?openBirbal=1" aria-label="Ask Birbal" title="Ask Birbal">&#x1F916;</a>
+
+<script>
+    function showTab(id, button) {
+        document.querySelectorAll('.panel').forEach((panel) => {
+            panel.classList.remove('active');
+        });
+        document.querySelectorAll('.tab-btn').forEach((tab) => {
+            tab.classList.remove('active');
+        });
+
+        document.getElementById(id).classList.add('active');
+        button.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
+
+

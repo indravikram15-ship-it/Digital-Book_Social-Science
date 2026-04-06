@@ -1,0 +1,535 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Dashboard | NCERT Class 8</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@300;600&display=swap');
+
+        :root {
+            --birbal-skin: #ffdbac;
+            --birbal-robe: #6a2c91;
+            --birbal-turban: #ff9933;
+            --birbal-accent: #ffd700;
+        }
+
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background: #0a0b1e; /* Deep Violet Night */
+            background: radial-gradient(circle at center, #1a1b3a 0%, #050510 100%);
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* --- BACKGROUND DECORATION --- */
+        .stars {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.3; pointer-events: none;
+        }
+
+        /* --- HEADER --- */
+        header {
+            text-align: center; padding: 50px 20px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            margin: 0;
+        }
+
+        .subtitle {
+            letter-spacing: 2px;
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+
+        .subtitle-main {
+            font-weight: 700;
+            color: #7fd3ff;
+            text-shadow: 0 0 10px rgba(127, 211, 255, 0.55), 0 0 22px rgba(127, 211, 255, 0.35);
+        }
+
+        .subtitle-secondary {
+            color: #ffd766;
+            text-shadow: 0 0 10px rgba(255, 215, 102, 0.45);
+        }
+
+        /* --- SUBJECT GRID --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .subject-card {
+            position: relative;
+            height: 350px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            text-decoration: none;
+            color: white;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .subject-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255, 215, 0, 0.5);
+        }
+
+        /* --- INDIVIDUAL GRADIENTS --- */
+        .history { background: linear-gradient(135deg, rgba(139, 0, 0, 0.8) 0%, rgba(20, 0, 0, 0.9) 100%); }
+        .geography { background: linear-gradient(135deg, rgba(0, 100, 0, 0.8) 0%, rgba(0, 20, 0, 0.9) 100%); }
+        .civics { background: linear-gradient(135deg, rgba(0, 0, 139, 0.8) 0%, rgba(0, 0, 20, 0.9) 100%); }
+        .economics { background: linear-gradient(135deg, rgba(75, 0, 130, 0.8) 0%, rgba(20, 0, 30, 0.9) 100%); }
+
+        .subject-card h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            margin: 0;
+            z-index: 2;
+        }
+
+        .subject-card p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 10px;
+            z-index: 2;
+        }
+
+        /* --- THE ICON OVERLAY --- */
+        .icon-bg {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 5rem;
+            opacity: 0.25;
+            color: rgba(255, 215, 0, 0.9);
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            transition: 0.4s;
+        }
+
+        .subject-card:hover .icon-bg {
+            opacity: 0.7;
+            transform: rotate(-15deg) scale(1.2);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- MOBILE VIEW --- */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .container { grid-template-columns: 1fr; }
+            .birbal-widget {
+                width: 90vw;
+                right: 5vw;
+                bottom: 10px;
+            }
+        }
+
+        /* --- BIRBAL CHATBOT WIDGET --- */
+        .birbal-widget {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            z-index: 10000;
+            font-family: 'Poppins', sans-serif;
+            width: 320px;
+            max-width: calc(100vw - 40px);
+        }
+
+        .birbal-toggle {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #ffd966 0%, #ffb347 100%);
+            border-radius: 999px;
+            padding: 12px 16px;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 52px;
+            overflow: hidden;
+        }
+
+        .birbal-toggle:hover {
+            width: 220px;
+            box-shadow: 0 22px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .birbal-toggle > div {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .birbal-toggle:hover > div {
+            opacity: 1;
+        }
+
+        .birbal-icon {
+            position: relative;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #ffe0b3, #d49b6d 45%, #a86433 100%);
+            border: 3px solid #fff;
+            box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.08);
+        }
+
+        .birbal-icon::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 6px;
+            width: 40px;
+            height: 28px;
+            background: var(--birbal-turban);
+            border-radius: 30px 30px 18px 18px;
+            border: 2px solid #e67e22;
+            box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.12);
+        }
+
+        .birbal-icon::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 19px;
+            width: 14px;
+            height: 18px;
+            background: #ff4c4c;
+            border-radius: 50%;
+            border: 2px solid #f8d347;
+        }
+
+        .birbal-icon .eye,
+        .mini-avatar .eye {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #3d1d0f;
+            border-radius: 50%;
+            top: 24px;
+        }
+
+        .birbal-icon .eye.left { left: 14px; }
+        .birbal-icon .eye.right { right: 14px; }
+
+        .birbal-icon .eyebrow,
+        .mini-avatar .eyebrow {
+            position: absolute;
+            width: 16px;
+            height: 3px;
+            background: #5d4037;
+            border-radius: 12px;
+            top: 18px;
+        }
+
+        .birbal-icon .eyebrow.left { left: 12px; transform: rotate(-8deg); }
+        .birbal-icon .eyebrow.right { right: 12px; transform: rotate(8deg); }
+
+        .birbal-icon .mustache,
+        .mini-avatar .mustache {
+            position: absolute;
+            width: 40px;
+            height: 10px;
+            background: #3d1d0f;
+            border-radius: 50% 50% 0 0;
+            bottom: 10px;
+            left: calc(50% - 20px);
+        }
+
+        .birbal-icon .smile,
+        .mini-avatar .smile {
+            position: absolute;
+            width: 22px;
+            height: 12px;
+            border-bottom: 3px solid #3d1d0f;
+            border-radius: 0 0 50% 50%;
+            bottom: 6px;
+            left: calc(50% - 11px);
+        }
+
+        .toggle-title {
+            font-weight: 700;
+            color: #2d132c;
+            letter-spacing: 0.03em;
+        }
+
+        .toggle-subtitle {
+            font-size: 0.83rem;
+            opacity: 0.85;
+            color: #3f1a1a;
+        }
+
+        .birbal-panel {
+            margin-top: 18px;
+            background: rgba(13, 10, 36, 0.96);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.35);
+            border-radius: 28px;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.35s ease, opacity 0.35s ease;
+            opacity: 0;
+        }
+
+        .birbal-panel.open {
+            max-height: 420px;
+            opacity: 1;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 18px 12px 18px;
+        }
+
+        .mini-avatar {
+            position: relative;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #ffe0b3, #c78457 60%, #905431 100%);
+            border: 2px solid #f8d347;
+            box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .panel-title {
+            font-weight: 700;
+            color: #ffd966;
+            font-size: 1rem;
+        }
+
+        .panel-status {
+            font-size: 0.81rem;
+            color: rgba(255, 255, 255, 0.78);
+            margin-top: 2px;
+        }
+
+        .close-btn {
+            margin-left: auto;
+            background: transparent;
+            color: #fff;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.2s ease;
+        }
+
+        .close-btn:hover {
+            opacity: 1;
+        }
+
+        .message-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 0 18px 10px 18px;
+            max-height: 240px;
+            overflow-y: auto;
+        }
+
+        .message {
+            padding: 14px 16px;
+            border-radius: 18px;
+            line-height: 1.45;
+            font-size: 0.95rem;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .message.bot {
+            background: rgba(255, 255, 255, 0.95);
+            color: #2b1b12;
+            align-self: flex-start;
+            border: 1px solid rgba(255, 215, 0, 0.25);
+        }
+
+        .message.user {
+            background: rgba(16, 22, 60, 0.95);
+            color: #f7f1d1;
+            align-self: flex-end;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .message-input {
+            padding: 0 18px 18px 18px;
+        }
+
+        .message-input input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .message-input input::placeholder {
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        @media (max-width: 600px) {
+            .birbal-widget {
+                width: 100%;
+                right: 0;
+                left: 0;
+                bottom: 0;
+                padding: 0 16px 16px;
+            }
+
+            .birbal-toggle {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="assets/responsive.css">
+</head>
+<body>
+
+<div class="stars"></div>
+
+<header>
+    <p class="subtitle"><span class="subtitle-main">CBSE SOCIAL SCIENCE</span> <span class="subtitle-secondary">(Class-8)</span></p>
+    <h1>SELECT YOUR REALM</h1>
+</header>
+
+<div class="container">
+    <a href="history_chapters.html" class="subject-card history">
+        <div class="icon-bg">&#x1F4DC;</div>
+        <h2>Our Pasts</h2>
+        <p>Explore the timelines of the Indian struggle and colonial rule.</p>
+    </a>
+
+    <a href="geography_chapters.html" class="subject-card geography">
+        <div class="icon-bg">&#x1F30D;</div>
+        <h2>Resources</h2>
+        <p>Analyze the land, soil, water, and wildlife resources of our planet.</p>
+    </a>
+
+    <a href="civics_chapters.html" class="subject-card civics">
+        <div class="icon-bg">&#x2696;&#xFE0F;</div>
+        <h2>Social Life</h2>
+        <p>Understand the Indian Constitution and the Parliamentary system.</p>
+    </a>
+
+    <a href="economics_chapters.html" class="subject-card economics">
+        <div class="icon-bg">&#x1F48E;</div>
+        <h2>Development</h2>
+        <p>Learn about human resources and the economic growth of nations.</p>
+    </a>
+</div>
+
+<div class="birbal-widget">
+    <div class="birbal-toggle" onclick="toggleBirbalChat()">
+        <div class="birbal-icon">
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+            <div class="eyebrow left"></div>
+            <div class="eyebrow right"></div>
+            <div class="mustache"></div>
+            <div class="smile"></div>
+        </div>
+        <div>
+            <div class="toggle-title">Ask Birbal</div>
+        </div>
+    </div>
+    <div class="birbal-panel" id="birbalPanel">
+        <div class="panel-header">
+            <div class="mini-avatar">
+                <div class="eye left"></div>
+                <div class="eye right"></div>
+                <div class="eyebrow left"></div>
+                <div class="eyebrow right"></div>
+                <div class="mustache"></div>
+                <div class="smile"></div>
+            </div>
+            <div>
+                <div class="panel-title">Birbal Bot</div>
+                <div class="panel-status">Wise, witty, and ready</div>
+            </div>
+            <button class="close-btn" onclick="toggleBirbalChat()">&times;</button>
+        </div>
+        <div class="message-list" id="messageList">
+            <div class="message bot">Jahanpanah, ask your question and I shall answer with wit.</div>
+        </div>
+        <div class="message-input">
+            <input id="birbalInput" placeholder="Type your question..." onkeypress="birbalChat(event)">
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleBirbalChat() {
+        document.getElementById('birbalPanel').classList.toggle('open');
+    }
+
+    function birbalChat(e) {
+        if (e.key !== 'Enter') return;
+        const input = document.getElementById('birbalInput');
+        const messageList = document.getElementById('messageList');
+        if (!input.value.trim()) return;
+
+        const userBubble = document.createElement('div');
+        userBubble.className = 'message user';
+        userBubble.textContent = input.value.trim();
+        messageList.appendChild(userBubble);
+
+        const botReplies = [
+            'A clever question, but the answer lies in patience!',
+            'Logic is the sharpest sword in my collection.',
+            'Even Emperor Akbar would be impressed by that query.',
+            'Let me think... ah! The solution is simpler than you think.',
+            'A wise answer waits for the right moment - here it is.'
+        ];
+
+        input.value = '';
+        setTimeout(() => {
+            const botBubble = document.createElement('div');
+            botBubble.className = 'message bot';
+            botBubble.textContent = botReplies[Math.floor(Math.random() * botReplies.length)];
+            messageList.appendChild(botBubble);
+            messageList.scrollTop = messageList.scrollHeight;
+        }, 450);
+    }
+
+    (function autoOpenBirbalFromLink() {
+        const query = new URLSearchParams(window.location.search);
+        if (query.get('openBirbal') !== '1') return;
+
+        const panel = document.getElementById('birbalPanel');
+        if (!panel) return;
+
+        panel.classList.add('open');
+        const input = document.getElementById('birbalInput');
+        if (input) input.focus();
+    })();
+</script>
+
+</body>
+</html>
+

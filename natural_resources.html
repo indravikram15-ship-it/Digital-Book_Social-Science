@@ -1,0 +1,1877 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Resources and Their Use</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --bg1: #06120b;
+            --bg2: #173726;
+            --accent: #8be58f;
+            --accent2: #c8f7ca;
+            --line: rgba(255, 255, 255, 0.18);
+            --card: rgba(255, 255, 255, 0.07);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            color: #e8f5e9;
+            background:
+                radial-gradient(ellipse at 50% -10%, rgba(170, 255, 176, 0.2) 0%, rgba(170, 255, 176, 0) 56%),
+                radial-gradient(ellipse at 15% 18%, rgba(78, 160, 95, 0.35) 0%, rgba(78, 160, 95, 0) 52%),
+                radial-gradient(ellipse at 85% 22%, rgba(53, 128, 70, 0.35) 0%, rgba(53, 128, 70, 0) 52%),
+                linear-gradient(180deg, #224f37 0%, #173726 45%, #0f2618 70%, #08170d 100%);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 28%, rgba(255, 255, 255, 0.08) 0 2px, transparent 3px),
+                radial-gradient(circle at 70% 18%, rgba(255, 255, 255, 0.06) 0 2px, transparent 3px),
+                radial-gradient(circle at 86% 38%, rgba(255, 255, 255, 0.05) 0 2px, transparent 3px),
+                radial-gradient(ellipse at 60% 85%, rgba(139, 229, 143, 0.09) 0%, transparent 68%);
+            background-size: 160px 160px, 220px 220px, 260px 260px, 100% 100%;
+            pointer-events: none;
+            animation: pulseGlow 7s ease-in-out infinite alternate;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 42vh;
+            background:
+                linear-gradient(155deg, transparent 46%, rgba(7, 26, 13, 0.92) 47%) 0 100%/150px 62% repeat-x,
+                linear-gradient(205deg, transparent 46%, rgba(8, 33, 16, 0.92) 47%) 0 100%/150px 62% repeat-x,
+                linear-gradient(155deg, transparent 46%, rgba(12, 49, 23, 0.74) 47%) 75px 100%/170px 76% repeat-x,
+                linear-gradient(205deg, transparent 46%, rgba(12, 49, 23, 0.74) 47%) 75px 100%/170px 76% repeat-x,
+                linear-gradient(to top, rgba(4, 14, 7, 0.95), rgba(4, 14, 7, 0));
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.95;
+        }
+
+        @keyframes pulseGlow {
+            from { opacity: 0.6; }
+            to   { opacity: 1; }
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 42px 22px 90px;
+        }
+
+        /* Back link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            opacity: 0.85;
+            margin-bottom: 30px;
+            transition: opacity 0.18s;
+        }
+        .back-link:hover { opacity: 1; }
+
+        /* Chapter banner */
+        .chapter-banner {
+            text-align: center;
+            margin-bottom: 46px;
+        }
+
+        .chapter-glow-box {
+            position: relative;
+            border: 2px solid rgba(139, 229, 143, 0.55);
+            border-radius: 18px;
+            padding: 22px 20px 16px;
+            background:
+                radial-gradient(circle at 15% 10%, rgba(139, 229, 143, 0.22), transparent 48%),
+                radial-gradient(circle at 85% 15%, rgba(139, 229, 143, 0.2), transparent 44%),
+                linear-gradient(160deg, rgba(20, 58, 33, 0.75), rgba(10, 27, 16, 0.88));
+            box-shadow: 0 0 0 1px rgba(139, 229, 143, 0.3), 0 0 30px rgba(139, 229, 143, 0.3), 0 20px 36px rgba(0, 0, 0, 0.35);
+            overflow: hidden;
+        }
+
+        .chapter-glow-box::before,
+        .chapter-glow-box::after {
+            content: '🌲  🌳  🌲  🌳  🌲  🌳  🌲';
+            position: absolute;
+            left: 10px;
+            right: 10px;
+            font-size: 1rem;
+            letter-spacing: 8px;
+            color: rgba(190, 255, 196, 0.85);
+            text-shadow: 0 0 14px rgba(139, 229, 143, 0.5);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .chapter-glow-box::before {
+            top: 6px;
+        }
+
+        .chapter-glow-box::after {
+            bottom: 6px;
+        }
+
+        .lang-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: -20px 0 28px;
+            flex-wrap: wrap;
+        }
+
+        .tool-btn {
+            border: 1px solid rgba(132, 183, 255, 0.45);
+            background: rgba(132, 183, 255, 0.15);
+            color: #e4f0ff;
+            padding: 7px 14px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.84rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        .lang-btn {
+            border: 1px solid rgba(139, 229, 143, 0.4);
+            background: rgba(139, 229, 143, 0.12);
+            color: #dff4e0;
+            padding: 7px 14px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.84rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, rgba(139, 229, 143, 0.35), rgba(85, 170, 95, 0.32));
+            color: #f4fff5;
+            box-shadow: 0 0 0 1px rgba(139, 229, 143, 0.45);
+        }
+
+        .chapter-icon {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 14px;
+            filter: drop-shadow(0 0 18px rgba(139, 229, 143, 0.4));
+        }
+
+        .chapter-banner h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.3rem, 3.5vw, 2rem);
+            color: var(--accent);
+            letter-spacing: 0.03em;
+            text-shadow: 0 0 28px rgba(139, 229, 143, 0.38);
+            line-height: 1.3;
+        }
+
+        .chapter-banner .subject-tag {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 18px;
+            border-radius: 50px;
+            border: 1px solid rgba(139, 229, 143, 0.35);
+            background: rgba(139, 229, 143, 0.1);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent2);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        /* Section cards */
+        .sections {
+            display: grid;
+            gap: 22px;
+        }
+
+        .section-card {
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: var(--card);
+            backdrop-filter: blur(6px);
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+
+        .section-card:hover {
+            box-shadow: 0 0 0 1px rgba(139, 229, 143, 0.35), 0 20px 40px rgba(0, 0, 0, 0.35), 0 0 26px rgba(139, 229, 143, 0.15);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 22px;
+            background: rgba(139, 229, 143, 0.08);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .section-header .s-icon {
+            font-size: 1.5rem;
+            filter: drop-shadow(0 0 6px rgba(139, 229, 143, 0.5));
+        }
+
+        .section-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--accent);
+            letter-spacing: 0.04em;
+        }
+
+        .section-body {
+            padding: 20px 22px;
+        }
+
+        .section-body p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #cde8ce;
+            margin-bottom: 14px;
+        }
+
+        .section-body p:last-child { margin-bottom: 0; }
+
+        .concept-teacher {
+            margin-top: 16px;
+        }
+
+        .review-summary {
+            margin-top: 8px;
+            padding: 18px 20px;
+            border-left: 5px solid #2f6fc7;
+            border-radius: 0 14px 14px 0;
+            background: linear-gradient(180deg, rgba(250, 250, 245, 0.96), rgba(239, 236, 214, 0.94));
+            color: #28425e;
+            box-shadow: inset 0 0 0 1px rgba(47, 111, 199, 0.12);
+        }
+
+        .review-summary p {
+            color: #2f3e4e;
+            margin: 0;
+        }
+
+        .review-heading {
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 8px 18px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #1153a6, #2a77d8);
+            color: #ffffff;
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.04em;
+            box-shadow: 0 10px 24px rgba(17, 83, 166, 0.26);
+        }
+
+        .question-paper {
+            margin-top: 18px;
+            padding: 20px 22px;
+            border-radius: 16px;
+            background: linear-gradient(180deg, rgba(253, 247, 226, 0.98), rgba(247, 239, 207, 0.96));
+            border: 1px solid rgba(214, 176, 77, 0.35);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35), 0 18px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .question-paper h4 {
+            margin: 0 0 14px;
+            color: #1153a6;
+            font-family: 'Cinzel', serif;
+            font-size: 1.05rem;
+        }
+
+        .question-paper ol {
+            margin: 0;
+            padding-left: 26px;
+            display: grid;
+            gap: 12px;
+            color: #2c2c2c;
+            font-size: 0.96rem;
+            line-height: 1.7;
+        }
+
+        /* Key points list */
+        .key-list {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .key-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.93rem;
+            line-height: 1.7;
+            color: #cde8ce;
+        }
+
+        .key-list li::before {
+            content: '🌱';
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Types grid */
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+
+        .type-card {
+            border: 1px solid rgba(139, 229, 143, 0.28);
+            border-radius: 14px;
+            padding: 16px;
+            background: rgba(139, 229, 143, 0.07);
+            text-align: center;
+        }
+
+        .type-card .t-icon { font-size: 2rem; display: block; margin-bottom: 8px; }
+
+        .type-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 0.82rem;
+            color: var(--accent);
+            margin-bottom: 6px;
+            letter-spacing: 0.04em;
+        }
+
+        .type-card p {
+            font-size: 0.82rem;
+            line-height: 1.55;
+            color: #aad6ab;
+            margin: 0 !important;
+        }
+
+        /* Did you know */
+        .did-you-know {
+            margin-top: 14px;
+            padding: 14px 18px;
+            border-left: 4px solid var(--accent);
+            border-radius: 0 12px 12px 0;
+            background: rgba(139, 229, 143, 0.1);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--accent2);
+        }
+
+        .did-you-know strong {
+            color: var(--accent);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .teacher-callout {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 8px 0 18px;
+            flex-wrap: wrap;
+        }
+
+        .teacher-photo {
+            width: 140px;
+            max-width: 40vw;
+            border-radius: 16px;
+            border: 2px solid rgba(139, 229, 143, 0.7);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35), 0 0 22px rgba(139, 229, 143, 0.55), 0 0 48px rgba(139, 229, 143, 0.3);
+            display: block;
+            background: rgba(255, 255, 255, 0.06);
+            transition: box-shadow 0.25s ease;
+        }
+
+        .teacher-photo:hover {
+            animation: teacherHoverMove 0.85s ease-in-out infinite alternate;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.36), 0 0 30px rgba(139, 229, 143, 0.72), 0 0 60px rgba(139, 229, 143, 0.45);
+        }
+
+        @keyframes teacherHoverMove {
+            from { transform: translateY(0) rotate(0deg) scale(1); }
+            to { transform: translateY(-8px) rotate(-2deg) scale(1.03); }
+        }
+
+        .speech-bubble {
+            position: relative;
+            max-width: 520px;
+            background: linear-gradient(145deg, rgba(255, 250, 230, 0.95), rgba(240, 255, 230, 0.92));
+            color: #183815;
+            border: 2px solid #8be58f;
+            border-radius: 16px;
+            padding: 14px 16px;
+            box-shadow: 0 0 0 1px rgba(139, 229, 143, 0.25), 0 10px 24px rgba(0, 0, 0, 0.25);
+            line-height: 1.65;
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 28px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 12px solid #8be58f;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 29px;
+            width: 0;
+            height: 0;
+            border-top: 9px solid transparent;
+            border-bottom: 9px solid transparent;
+            border-right: 10px solid rgba(246, 255, 237, 0.98);
+        }
+
+        .student-callout {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 14px 0 18px;
+            padding: 14px;
+            border: 1px solid rgba(132, 183, 255, 0.35);
+            border-radius: 16px;
+            background: linear-gradient(145deg, rgba(30, 66, 120, 0.25), rgba(20, 40, 78, 0.32));
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28), 0 0 20px rgba(132, 183, 255, 0.2);
+            flex-wrap: wrap;
+        }
+
+        .student-photo {
+            width: 140px;
+            max-width: 40vw;
+            border-radius: 16px;
+            border: 2px solid rgba(132, 183, 255, 0.6);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35), 0 0 20px rgba(132, 183, 255, 0.45);
+            display: block;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .student-speech-bubble {
+            position: relative;
+            max-width: 540px;
+            background: linear-gradient(145deg, rgba(219, 237, 255, 0.96), rgba(198, 224, 255, 0.92));
+            color: #17335b;
+            border: 2px solid #84b7ff;
+            border-radius: 16px;
+            padding: 14px 16px;
+            line-height: 1.68;
+            font-size: 0.92rem;
+            font-weight: 600;
+            box-shadow: 0 0 0 1px rgba(132, 183, 255, 0.32), 0 0 16px rgba(132, 183, 255, 0.55), 0 0 36px rgba(132, 183, 255, 0.3);
+        }
+
+        .student-speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 12px solid #84b7ff;
+        }
+
+        .student-speech-bubble::after {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 31px;
+            width: 0;
+            height: 0;
+            border-top: 9px solid transparent;
+            border-bottom: 9px solid transparent;
+            border-right: 10px solid rgba(222, 238, 255, 0.98);
+        }
+
+        .quote-box {
+            margin-top: 16px;
+            padding: 16px 18px;
+            border: 2px solid #ff5b5b;
+            background: linear-gradient(145deg, rgba(255, 240, 197, 0.96), rgba(255, 223, 148, 0.9));
+            box-shadow: 0 0 0 1px rgba(255, 91, 91, 0.35), 0 0 18px rgba(255, 70, 70, 0.45), 0 0 34px rgba(255, 70, 70, 0.25);
+            color: #5a1f1f;
+            border-radius: 12px;
+        }
+
+        .quote-box p {
+            margin: 0 0 10px;
+            font-style: italic;
+            line-height: 1.75;
+            font-size: 0.98rem;
+            color: #4c1313;
+        }
+
+        .quote-box p:last-of-type {
+            margin-bottom: 14px;
+        }
+
+        .click-me-btn {
+            display: inline-block;
+            margin-top: 4px;
+            padding: 8px 22px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #c0392b, #ff6b6b);
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(192, 57, 43, 0.45), 0 0 12px rgba(255, 70, 70, 0.3);
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .click-me-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(192, 57, 43, 0.6), 0 0 18px rgba(255, 70, 70, 0.45);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal {
+            background: linear-gradient(160deg, #fffbe8, #fff2c4);
+            border: 2px solid #ff5b5b;
+            border-radius: 18px;
+            padding: 32px 28px 26px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 0 0 1px rgba(255, 91, 91, 0.35), 0 0 30px rgba(255, 70, 70, 0.4), 0 24px 48px rgba(0, 0, 0, 0.4);
+            animation: modalPop 0.22s ease;
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.88); opacity: 0; }
+            to   { transform: scale(1);    opacity: 1; }
+        }
+
+        .modal h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: #7b1a1a;
+            margin: 0 0 14px;
+            text-align: center;
+        }
+
+        .modal p {
+            font-size: 0.93rem;
+            line-height: 1.75;
+            color: #4c1313;
+            margin: 0 0 10px;
+        }
+
+        .modal p:last-of-type { margin-bottom: 0; }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #a33;
+            line-height: 1;
+        }
+
+        .modal-close:hover { color: #c0392b; }
+
+        /* Chatbot FAB */
+        .chatbot-fab {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 64px;
+            height: 64px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: radial-gradient(circle at 30% 30%, #ffe6a8, #ffc04d 62%, #e59225 100%);
+            box-shadow: 0 16px 28px rgba(0, 0, 0, 0.3), 0 0 26px rgba(255, 192, 77, 0.36);
+            color: #2b1c00;
+            font-size: 1.9rem;
+            cursor: pointer;
+            z-index: 20;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .chatbot-fab:hover {
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 20px 34px rgba(0, 0, 0, 0.35), 0 0 34px rgba(255, 192, 77, 0.5);
+        }
+
+        .concept-note {
+            margin-top: 12px;
+            padding: 12px 14px;
+            border: 1px solid rgba(139, 229, 143, 0.35);
+            border-radius: 12px;
+            background: rgba(139, 229, 143, 0.09);
+            color: #d6f0d6;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 14px;
+            margin-top: 16px;
+        }
+
+        .media-card {
+            border: 1px solid rgba(139, 229, 143, 0.28);
+            border-radius: 14px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .media-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .media-card p {
+            margin: 0;
+            padding: 10px 12px;
+            font-size: 0.84rem;
+            color: #d1e6d3;
+            line-height: 1.6;
+            border-top: 1px solid rgba(139, 229, 143, 0.18);
+        }
+
+        .screenshot-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .screenshot-item {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            overflow: hidden;
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .screenshot-item p {
+            margin: 0;
+            padding: 8px 10px;
+            font-size: 0.82rem;
+            color: #d5e9d6;
+            line-height: 1.5;
+        }
+
+        .screenshot-empty {
+            margin-top: 12px;
+            padding: 10px 12px;
+            border: 1px dashed rgba(255, 255, 255, 0.35);
+            border-radius: 10px;
+            color: #d8ead9;
+            font-size: 0.86rem;
+        }
+
+        .video-wrap {
+            margin-top: 16px;
+            border: 1px solid rgba(139, 229, 143, 0.3);
+            border-radius: 14px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.22);
+        }
+
+        .video-wrap iframe {
+            width: 100%;
+            min-height: 280px;
+            border: 0;
+            display: block;
+        }
+
+        .video-wrap figcaption {
+            padding: 10px 12px;
+            font-size: 0.84rem;
+            color: #d0e9d2;
+            border-top: 1px solid rgba(139, 229, 143, 0.2);
+        }
+
+        .quick-check {
+            margin-top: 14px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(132, 183, 255, 0.35);
+            background: rgba(132, 183, 255, 0.12);
+        }
+
+        .quick-check h4 {
+            margin: 0 0 8px;
+            color: #b8d7ff;
+            font-size: 0.9rem;
+            letter-spacing: 0.03em;
+        }
+
+        .quick-check ol {
+            margin: 0;
+            padding-left: 18px;
+            display: grid;
+            gap: 8px;
+            color: #dcecff;
+            font-size: 0.9rem;
+            line-height: 1.65;
+        }
+
+        .recap-strip {
+            display: grid;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .recap-item {
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: #e3f3e4;
+            font-size: 0.9rem;
+            line-height: 1.65;
+        }
+
+        .lang-hi-block {
+            display: none;
+        }
+
+        body[data-lang="hi"] .bilingual-card .lang-en-block {
+            display: none;
+        }
+
+        body[data-lang="hi"] .bilingual-card .lang-hi-block {
+            display: block;
+        }
+
+        .quiz-form {
+            display: grid;
+            gap: 14px;
+            margin-top: 16px;
+        }
+
+        .quiz-question {
+            border: 1px solid rgba(132, 183, 255, 0.35);
+            border-radius: 12px;
+            padding: 12px 14px;
+            background: rgba(132, 183, 255, 0.09);
+        }
+
+        .quiz-question h4 {
+            margin: 0 0 8px;
+            font-size: 0.92rem;
+            color: #d6e8ff;
+        }
+
+        .quiz-question label {
+            display: block;
+            margin: 6px 0;
+            font-size: 0.9rem;
+            color: #e4f1ff;
+            line-height: 1.6;
+            cursor: pointer;
+        }
+
+        .quiz-submit {
+            border: 1px solid rgba(139, 229, 143, 0.5);
+            background: linear-gradient(135deg, rgba(139, 229, 143, 0.35), rgba(93, 179, 102, 0.3));
+            color: #f3fff4;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 10px 14px;
+            cursor: pointer;
+            width: fit-content;
+        }
+
+        .quiz-result {
+            margin-top: 14px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(139, 229, 143, 0.35);
+            background: rgba(139, 229, 143, 0.1);
+            color: #dcf6de;
+            font-size: 0.92rem;
+            line-height: 1.65;
+            display: none;
+        }
+
+        .score-track {
+            margin-top: 10px;
+            height: 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .score-fill {
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #84b7ff, #8be58f);
+            transition: width 0.35s ease;
+        }
+
+        .lang-en-inline {
+            display: inline;
+        }
+
+        .lang-hi-inline {
+            display: none;
+        }
+
+        body[data-lang="hi"] .lang-en-inline {
+            display: none;
+        }
+
+        body[data-lang="hi"] .lang-hi-inline {
+            display: inline;
+        }
+
+        .answer-key {
+            margin-top: 14px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 222, 128, 0.4);
+            background: rgba(255, 222, 128, 0.14);
+            color: #fff2c8;
+        }
+
+        .answer-key h4 {
+            margin: 0 0 8px;
+            font-size: 0.9rem;
+            color: #fff2c8;
+        }
+
+        .answer-key ul {
+            margin: 0;
+            padding-left: 18px;
+            display: grid;
+            gap: 6px;
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        .quiz-explanations {
+            margin-top: 12px;
+            display: grid;
+            gap: 8px;
+        }
+
+        .quiz-explanation {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 12px;
+            color: #e8f5e9;
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        .quiz-explanation strong {
+            color: #bce6ff;
+        }
+
+        .worksheet-sheet {
+            margin-top: 12px;
+            display: grid;
+            gap: 14px;
+        }
+
+        .worksheet-block {
+            border: 1px dashed rgba(255, 255, 255, 0.35);
+            border-radius: 10px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .worksheet-block h4 {
+            margin: 0 0 8px;
+            color: #d9ecff;
+            font-size: 0.9rem;
+        }
+
+        .blank-lines {
+            min-height: 92px;
+            background:
+                repeating-linear-gradient(
+                    to bottom,
+                    transparent,
+                    transparent 20px,
+                    rgba(255, 255, 255, 0.25) 21px,
+                    transparent 22px
+                );
+        }
+
+        .worksheet-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .worksheet-meta span {
+            display: block;
+            padding-bottom: 6px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.45);
+            color: #d9efda;
+            font-size: 0.88rem;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            body * {
+                visibility: hidden !important;
+            }
+
+            #worksheetSection,
+            #worksheetSection * {
+                visibility: visible !important;
+            }
+
+            #worksheetSection {
+                position: absolute;
+                inset: 0;
+                margin: 0;
+                border: 0;
+                border-radius: 0;
+                background: #fff;
+                color: #000;
+                box-shadow: none;
+            }
+
+            #worksheetSection .section-header,
+            #worksheetSection .section-body,
+            #worksheetSection .worksheet-block,
+            #worksheetSection .worksheet-meta span {
+                color: #000 !important;
+                border-color: #666 !important;
+                background: #fff !important;
+            }
+        }
+
+        @media (max-width: 980px) {
+            .page {
+                padding-top: 34px;
+                padding-bottom: 82px;
+            }
+
+            .chapter-banner {
+                margin-bottom: 38px;
+            }
+
+            .chapter-glow-box {
+                padding: 20px 16px 14px;
+            }
+
+            .section-header,
+            .section-body {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .speech-bubble,
+            .student-speech-bubble {
+                max-width: 100%;
+            }
+
+            .question-paper,
+            .review-summary {
+                padding: 16px;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .video-wrap iframe {
+                min-height: 220px;
+            }
+
+            .chapter-icon {
+                font-size: 3.1rem;
+                margin-bottom: 10px;
+            }
+
+            .chapter-glow-box::before,
+            .chapter-glow-box::after {
+                letter-spacing: 4px;
+                font-size: 0.84rem;
+            }
+
+            .lang-controls {
+                margin-top: -14px;
+                gap: 8px;
+            }
+
+            .lang-btn,
+            .tool-btn {
+                font-size: 0.8rem;
+                padding: 8px 12px;
+            }
+
+            .sections {
+                gap: 16px;
+            }
+
+            .section-header {
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .section-header h2 {
+                font-size: 0.92rem;
+                line-height: 1.45;
+            }
+
+            .section-body {
+                padding: 16px;
+            }
+
+            .section-body p,
+            .key-list li,
+            .quiz-question label {
+                font-size: 0.9rem;
+                line-height: 1.7;
+            }
+
+            .teacher-callout,
+            .student-callout {
+                gap: 12px;
+                margin: 8px 0 14px;
+                padding: 10px;
+            }
+
+            .teacher-photo,
+            .student-photo {
+                width: 108px;
+                max-width: 34vw;
+            }
+
+            .speech-bubble,
+            .student-speech-bubble {
+                padding: 12px 13px;
+                font-size: 0.88rem;
+            }
+
+            .speech-bubble::before,
+            .speech-bubble::after,
+            .student-speech-bubble::before,
+            .student-speech-bubble::after {
+                display: none;
+            }
+
+            .types-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .type-card h3 {
+                font-size: 0.86rem;
+            }
+
+            .type-card p,
+            .quick-check ol,
+            .question-paper ol {
+                font-size: 0.88rem;
+            }
+
+            .question-paper ol,
+            .quick-check ol,
+            .answer-key ul {
+                padding-left: 18px;
+            }
+
+            .quiz-question {
+                padding: 10px 12px;
+            }
+
+            .quiz-submit {
+                width: 100%;
+                text-align: center;
+            }
+
+            .worksheet-meta {
+                grid-template-columns: 1fr;
+            }
+
+            .blank-lines {
+                min-height: 78px;
+            }
+
+            .modal {
+                width: min(94vw, 500px);
+                padding: 24px 18px 18px;
+                border-radius: 14px;
+            }
+
+            .modal h3 {
+                font-size: 1rem;
+                line-height: 1.35;
+            }
+
+            .modal p,
+            .modal li {
+                font-size: 0.88rem;
+                line-height: 1.62;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .page {
+                padding-top: 26px;
+                padding-bottom: 76px;
+            }
+
+            .chapter-glow-box {
+                border-radius: 14px;
+                padding: 16px 12px 12px;
+            }
+
+            .chapter-banner .subject-tag {
+                padding: 4px 12px;
+                letter-spacing: 0.04em;
+                font-size: 0.72rem;
+            }
+
+            .chapter-glow-box::before,
+            .chapter-glow-box::after {
+                letter-spacing: 2px;
+                font-size: 0.76rem;
+            }
+
+            .section-card {
+                border-radius: 14px;
+            }
+
+            .section-header,
+            .section-body {
+                padding: 13px 12px;
+            }
+
+            .section-header .s-icon {
+                font-size: 1.25rem;
+            }
+
+            .quote-box,
+            .quick-check,
+            .concept-note,
+            .review-summary,
+            .question-paper,
+            .worksheet-block {
+                padding: 12px;
+            }
+
+            .click-me-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .teacher-photo,
+            .student-photo {
+                width: 96px;
+            }
+
+            .teacher-callout,
+            .student-callout {
+                border-radius: 12px;
+            }
+
+            .chatbot-fab {
+                width: 56px;
+                height: 56px;
+                font-size: 1.55rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .chapter-banner h1 {
+                font-size: 1.08rem;
+                letter-spacing: 0.01em;
+                line-height: 1.35;
+            }
+
+            .chapter-glow-box::before,
+            .chapter-glow-box::after {
+                display: none;
+            }
+
+            .chapter-banner .subject-tag {
+                white-space: normal;
+                line-height: 1.4;
+            }
+
+            .lang-controls {
+                justify-content: stretch;
+            }
+
+            .lang-btn,
+            .tool-btn {
+                flex: 1 1 100%;
+                width: 100%;
+            }
+
+            .section-header {
+                gap: 8px;
+            }
+
+            .section-header h2,
+            .speech-bubble,
+            .student-speech-bubble,
+            .section-body p,
+            .key-list li,
+            .question-paper li,
+            .quick-check li,
+            .quiz-question label,
+            .worksheet-block p,
+            .review-summary p,
+            .modal p,
+            .modal li {
+                overflow-wrap: anywhere;
+                word-break: break-word;
+            }
+
+            .section-header h2 {
+                font-size: 0.88rem;
+                line-height: 1.4;
+            }
+
+            .question-paper ol,
+            .quick-check ol,
+            .answer-key ul {
+                padding-left: 16px;
+            }
+
+            .quiz-question {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .modal {
+                padding: 18px 12px 14px;
+            }
+
+            .modal p,
+            .modal li {
+                font-size: 0.84rem;
+                line-height: 1.55;
+            }
+
+            .worksheet-block p {
+                line-height: 1.55;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="assets/responsive.css">
+</head>
+<body data-lang="en">
+
+<main class="page">
+
+    <a class="back-link" href="geography_chapters.html">&#8592; Back to Resources</a>
+
+    <div class="chapter-banner">
+        <div class="chapter-glow-box">
+            <span class="chapter-icon">&#x1F33F;</span>
+            <h1>Natural Resources and Their Use</h1>
+            <span class="subject-tag">Geography &nbsp;·&nbsp; Class 8</span>
+        </div>
+    </div>
+
+    <div class="lang-controls" aria-label="Language switcher">
+        <button type="button" class="lang-btn active" data-lang="en">English</button>
+        <button type="button" class="lang-btn" data-lang="hi">हिंदी</button>
+        <button type="button" class="tool-btn" id="printWorksheetBtn">Print Worksheet</button>
+    </div>
+
+    <div class="sections">
+        <div class="section-card">
+            <div class="section-header">
+                <span class="s-icon">&#x1F33F;</span>
+                <h2>Let's Dive into details !</h2>
+            </div>
+            <div class="section-body">
+                <div class="quote-box">
+                    <p>"Concerned social scientists are clear on what we need to do: we must move toward a regenerative economy, an economy that operates in harmony with nature, repurposing used resources, minimizing waste, and replenishing depleted resources. We must return to the innate wisdom of nature herself, the ultimate regenerator and recycler of all resources."</p>
+                    <p>- Christiana Figueres and Tom Rivett-Carnac in 'The Future We Choose'</p>
+                    <button class="click-me-btn" onclick="document.getElementById('quoteModal').classList.add('open')">Click me! &#x1F4A1;</button>
+                </div>
+                <div class="teacher-callout">
+                    <img class="teacher-photo" src="assets/img/teacher.png" alt="Teacher image">
+                    <div class="speech-bubble">
+                        Hello students! ab aapko samajh aa gaya hoga ki hamare scientists kis tarah se Natural Resources ke sustainable use aur uske conservation ke liye concerned hain............ Aao ab main aap logon ko samjhaata hu ki Natural Resources kya hote hain aur hume kaise unka sustainable use karna hai.
+                    </div>
+                </div>
+                <div class="student-callout">
+                    <a href="https://pngtree.com/freepng/smart-indian-school-students-portrait_23567290.html" target="_blank" rel="noopener noreferrer" aria-label="Open student image source">
+                        <img
+                            class="student-photo"
+                            src="assets/img/student.png"
+                            alt="Student image"
+                            loading="lazy"
+                            referrerpolicy="no-referrer"
+                            onerror="this.onerror=null;this.src='assets/img/student_fallback.svg';"
+                        >
+                    </a>
+                    <div class="student-speech-bubble">
+                        Wowww Sir.... hum samajh gaye ye Nature hamare liye ek resource hai. But Sir.....ye Natural Resources Bante kaise hain, or When does Nature become a Resource?
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card bilingual-card">
+            <div class="section-header">
+                <span class="s-icon">&#x2753;</span>
+                <h2>When does Nature become a Resource?</h2>
+            </div>
+            <div class="section-body">
+                <div class="lang-en-block">
+                    <p>Nature includes life and non-life forms around us. These become <strong>resources</strong> when humans use them for sustenance or to create useful goods.</p>
+                    <ul class="key-list">
+                        <li>A thing should be technologically accessible to be used as a resource.</li>
+                        <li>Its use should be economically feasible and culturally acceptable.</li>
+                        <li>Examples include water, air, soil, coal, petroleum, metal ores and timber.</li>
+                    </ul>
+                    <div class="concept-note">
+                        Simple idea: <strong>Nature + Human need + Access + Skill = Resource</strong>.
+                    </div>
+                </div>
+                <div class="lang-hi-block">
+                    <p>प्रकृति में जीवित और निर्जीव दोनों तत्व शामिल हैं। ये तभी <strong>संसाधन</strong> बनते हैं जब मनुष्य इन्हें अपनी जरूरतें पूरी करने या उपयोगी वस्तुएं बनाने में इस्तेमाल करता है।</p>
+                    <ul class="key-list">
+                        <li>किसी संसाधन का तकनीकी रूप से सुलभ होना जरूरी है।</li>
+                        <li>उसका उपयोग आर्थिक रूप से संभव और सांस्कृतिक रूप से स्वीकार्य होना चाहिए।</li>
+                        <li>उदाहरण: जल, वायु, मिट्टी, कोयला, पेट्रोलियम, धातु अयस्क और लकड़ी।</li>
+                    </ul>
+                    <div class="concept-note">
+                        आसान सूत्र: <strong>प्रकृति + आवश्यकता + पहुंच + कौशल = संसाधन</strong>।
+                    </div>
+                </div>
+                <div class="teacher-callout concept-teacher">
+                    <img class="teacher-photo" src="assets/img/teacher.png" alt="Teacher explanation">
+                    <div class="speech-bubble">
+                        <span class="lang-en-inline">Teacher note: The chapter explains that nature becomes a resource only when people can use it meaningfully. A tree in a forest is part of nature, but when humans can access it, shape it, and use it, it is treated as a resource. So utility, access, cost and cultural acceptance all matter.</span>
+                        <span class="lang-hi-inline">शिक्षक समझाइश: अध्याय बताता है कि प्रकृति तब संसाधन बनती है जब मनुष्य उसका उपयोग कर सके। जंगल का पेड़ प्रकृति का हिस्सा है, लेकिन जब उसकी लकड़ी उपयोग में आती है तो वही संसाधन कहलाता है। इसलिए उपयोगिता, पहुंच, लागत और सांस्कृतिक स्वीकृति सभी जरूरी हैं।</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card bilingual-card">
+            <div class="section-header">
+                <span class="s-icon">&#x1F9E0;</span>
+                <h2>Categories of Natural Resources</h2>
+            </div>
+            <div class="section-body">
+                <div class="lang-en-block">
+                    <p>We categorize natural resources to understand them better and communicate clearly. One useful way is to classify by use: life, materials, and energy.</p>
+                    <div class="did-you-know">
+                        <strong>Think About It</strong>
+                        What criteria can we use to categorize natural resources in daily life?
+                    </div>
+                    <ul class="key-list">
+                        <li>Resources essential for life: air, water, food-supporting soil.</li>
+                        <li>Resources for materials: wood, fibers, metals, minerals.</li>
+                        <li>Resources for energy: coal, petroleum, natural gas, wind, sunlight.</li>
+                    </ul>
+                </div>
+                <div class="lang-hi-block">
+                    <p>प्राकृतिक संसाधनों को समझने और स्पष्ट रूप से बताने के लिए उनका वर्गीकरण किया जाता है। एक उपयोगी तरीका है उपयोग के आधार पर वर्गीकरण: जीवन, सामग्री और ऊर्जा।</p>
+                    <div class="did-you-know">
+                        <strong>सोचिए</strong>
+                        हम प्राकृतिक संसाधनों को किन मानदंडों पर वर्गीकृत कर सकते हैं?
+                    </div>
+                    <ul class="key-list">
+                        <li>जीवन हेतु संसाधन: वायु, जल, भोजन देने वाली मिट्टी।</li>
+                        <li>सामग्री हेतु संसाधन: लकड़ी, रेशा, धातु, खनिज।</li>
+                        <li>ऊर्जा हेतु संसाधन: कोयला, पेट्रोलियम, गैस, पवन और सूर्य प्रकाश।</li>
+                    </ul>
+                </div>
+                <div class="teacher-callout concept-teacher">
+                    <img class="teacher-photo" src="assets/img/teacher.png" alt="Teacher explanation">
+                    <div class="speech-bubble">
+                        <span class="lang-en-inline">Teacher note: In this part, the book says categorising resources gives us a shared language. Once we decide the criterion, we can identify whether a resource supports life, provides materials, or serves energy needs.</span>
+                        <span class="lang-hi-inline">शिक्षक समझाइश: इस भाग में पुस्तक बताती है कि संसाधनों का वर्गीकरण करने से साझा समझ बनती है। मानदंड तय होने पर हम आसानी से पहचानते हैं कि कोई संसाधन जीवन, सामग्री या ऊर्जा के लिए है।</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card bilingual-card">
+            <div class="section-header">
+                <span class="s-icon">&#x1F5C2;&#xFE0F;</span>
+                <h2>Resources for Life, Materials and Energy</h2>
+            </div>
+            <div class="section-body">
+                <div class="lang-en-block">
+                    <p>The chapter next explains resources by the work they do in human life: some sustain life, some provide materials, and some supply energy.</p>
+                    <div class="types-grid">
+                        <div class="type-card">
+                            <span class="t-icon">&#x1F4A7;</span>
+                            <h3>Resources for Life</h3>
+                            <p>Air, water and food-giving soil are essential for human survival.</p>
+                        </div>
+                        <div class="type-card">
+                            <span class="t-icon">&#x1FAB5;</span>
+                            <h3>Resources for Materials</h3>
+                            <p>Wood, stone, fibres and metals help us make useful and beautiful objects.</p>
+                        </div>
+                        <div class="type-card">
+                            <span class="t-icon">&#x26A1;</span>
+                            <h3>Resources for Energy</h3>
+                            <p>Coal, petroleum, gas, sunlight, wind and water run homes, transport and industry.</p>
+                        </div>
+                    </div>
+                    <div class="quick-check">
+                        <h4>Quick Check</h4>
+                        <ol>
+                            <li>Why are air and water called life-supporting resources?</li>
+                            <li>How is wood both a natural gift and a material resource?</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="lang-hi-block">
+                    <p>अध्याय आगे संसाधनों को उनके उपयोग के आधार पर समझाता है: कुछ जीवन के लिए आवश्यक हैं, कुछ वस्तुएं बनाने में काम आते हैं, और कुछ ऊर्जा देते हैं।</p>
+                    <div class="types-grid">
+                        <div class="type-card">
+                            <span class="t-icon">&#x1F4A7;</span>
+                            <h3>जीवन हेतु संसाधन</h3>
+                            <p>वायु, जल और भोजन देने वाली मिट्टी मानव जीवन के लिए आवश्यक हैं।</p>
+                        </div>
+                        <div class="type-card">
+                            <span class="t-icon">&#x1FAB5;</span>
+                            <h3>सामग्री हेतु संसाधन</h3>
+                            <p>लकड़ी, पत्थर, रेशा और धातुएं उपयोगी व सुंदर वस्तुएं बनाने में काम आती हैं।</p>
+                        </div>
+                        <div class="type-card">
+                            <span class="t-icon">&#x26A1;</span>
+                            <h3>ऊर्जा हेतु संसाधन</h3>
+                            <p>कोयला, पेट्रोलियम, गैस, सूर्य, पवन और जल घर, यातायात और उद्योग चलाते हैं।</p>
+                        </div>
+                    </div>
+                    <div class="quick-check">
+                        <h4>झटपट जांच</h4>
+                        <ol>
+                            <li>वायु और जल को जीवन-सहायक संसाधन क्यों कहा जाता है?</li>
+                            <li>लकड़ी प्राकृतिक उपहार भी कैसे है और सामग्री संसाधन भी कैसे?</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="teacher-callout concept-teacher">
+                    <img class="teacher-photo" src="assets/img/teacher.png" alt="Teacher explanation">
+                    <div class="speech-bubble">
+                        <span class="lang-en-inline">Teacher note: These pages show that one chapter can classify the same natural world in different ways. Here, the focus is function: what keeps us alive, what becomes material, and what powers modern life.</span>
+                        <span class="lang-hi-inline">शिक्षक समझाइश: इन पन्नों में दिखाया गया है कि एक ही प्रकृति को अलग-अलग तरीकों से समझा जा सकता है। यहां ध्यान कार्य पर है: क्या जीवन को बनाए रखता है, क्या सामग्री देता है, और क्या ऊर्जा देता है।</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card bilingual-card">
+            <div class="section-header">
+                <span class="s-icon">&#x1F331;</span>
+                <h2>Cultural Practices and Ecological Mindfulness</h2>
+            </div>
+            <div class="section-body">
+                <div class="lang-en-block">
+                    <p>Many communities treat nature as sacred and follow practices that reduce ecological damage and preserve balance.</p>
+                    <ul class="key-list">
+                        <li>Gentle farming and low-disturbance methods help retain soil moisture.</li>
+                        <li>Forest produce like honey is harvested while keeping ecosystems alive.</li>
+                        <li>Community rituals often reinforce care for plants and local biodiversity.</li>
+                    </ul>
+                </div>
+                <div class="lang-hi-block">
+                    <p>कई समुदाय प्रकृति को पवित्र मानते हैं और ऐसे व्यवहार अपनाते हैं जो पर्यावरणीय नुकसान को कम करते हैं और संतुलन बनाए रखते हैं।</p>
+                    <ul class="key-list">
+                        <li>हल्की जुताई और संतुलित खेती मिट्टी की नमी बचाती है।</li>
+                        <li>जंगल उत्पाद जैसे शहद का संग्रह पारिस्थितिकी को बचाते हुए किया जा सकता है।</li>
+                        <li>समुदाय आधारित परंपराएं पौधों और जैव विविधता की रक्षा को बढ़ावा देती हैं।</li>
+                    </ul>
+                </div>
+                <div class="teacher-callout concept-teacher">
+                    <img class="teacher-photo" src="assets/img/teacher.png" alt="Teacher explanation">
+                    <div class="speech-bubble">
+                        <span class="lang-en-inline">Teacher note: The screenshots around these pages connect farming, honey collection, sacred plant traditions, and seasonal fishing rules. The textbook is teaching that ecological wisdom can come from everyday practices, not only from modern science.</span>
+                        <span class="lang-hi-inline">शिक्षक समझाइश: इन पन्नों के उदाहरण खेती, शहद संग्रह, पवित्र पौधों की परंपराएं और मौसम के अनुसार मछली पकड़ने के नियमों को जोड़ते हैं। पाठ्यपुस्तक बताती है कि पारिस्थितिक समझ रोजमर्रा की परंपराओं से भी आती है।</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card bilingual-card">
+            <div class="section-header">
+                <span class="s-icon">&#x267B;&#xFE0F;</span>
+                <h2>Responsible and Wise Use: Stewardship</h2>
+            </div>
+            <div class="section-body">
+                <div class="lang-en-block">
+                    <p>Stewardship means respecting nature and using resources in ways that support regeneration of renewables and careful use of non-renewables.</p>
+                    <div class="concept-note">
+                        Irresponsible treatment of natural resources leads to pollution, biodiversity loss and climate stress.
+                    </div>
+                    <ul class="key-list">
+                        <li>Groundwater extraction must not exceed recharge rates.</li>
+                        <li>Traditional water harvesting and pond rejuvenation help restoration.</li>
+                        <li>Overfishing and pollution need strict community and policy regulation.</li>
+                        <li>Sustainable agriculture practices improve long-term soil and yield health.</li>
+                    </ul>
+                </div>
+                <div class="lang-hi-block">
+                    <p>स्टीवर्डशिप का अर्थ है प्रकृति का सम्मान करते हुए संसाधनों का ऐसा उपयोग करना जिससे नवीकरणीय संसाधनों का पुनर्जनन हो और अनवीकरणीय संसाधनों का सोच-समझकर उपयोग हो।</p>
+                    <div class="concept-note">
+                        प्राकृतिक संसाधनों का गैर-जिम्मेदार उपयोग प्रदूषण, जैव विविधता हानि और जलवायु संकट को बढ़ाता है।
+                    </div>
+                    <ul class="key-list">
+                        <li>भूजल निकासी पुनर्भरण दर से अधिक नहीं होनी चाहिए।</li>
+                        <li>पारंपरिक जल-संचयन और तालाब पुनर्जीवन बहाली में मदद करते हैं।</li>
+                        <li>अतिरिक्त मछली पकड़ना और प्रदूषण नियंत्रित होना चाहिए।</li>
+                        <li>सतत कृषि से मिट्टी और उत्पादन दोनों दीर्घकाल में बेहतर होते हैं।</li>
+                    </ul>
+                </div>
+                <div class="teacher-callout concept-teacher">
+                    <img class="teacher-photo" src="assets/img/teacher.png" alt="Teacher explanation">
+                    <div class="speech-bubble">
+                        <span class="lang-en-inline">Teacher note: Later pages warn that careless use of groundwater, fisheries and land creates biodiversity loss and pollution. The Sikkim caselet then shows that organic, restorative farming can be difficult at first but supports long-term recovery of soil, health and livelihoods.</span>
+                        <span class="lang-hi-inline">शिक्षक समझाइश: आगे के पन्ने चेतावनी देते हैं कि भूजल, मत्स्य और भूमि का लापरवाह उपयोग जैव विविधता हानि और प्रदूषण बढ़ाता है। सिक्किम का केसलेट दिखाता है कि जैविक और पुनर्स्थापनात्मक खेती शुरुआत में कठिन हो सकती है, लेकिन लंबे समय में मिट्टी, स्वास्थ्य और आजीविका को मजबूत करती है।</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card bilingual-card">
+            <div class="section-header">
+                <span class="s-icon">&#x1F3AF;</span>
+                <h2>Before We Move On</h2>
+            </div>
+            <div class="section-body">
+                <div class="lang-en-block">
+                    <div class="review-summary">
+                        <span class="review-heading">Before We Move On ...</span>
+                        <p>Natural resources are materials and substances that occur in nature and are valuable to humans. There are different ways of categorising resources, and renewable as well as non-renewable are useful categories. The resource curse can be overcome through investment in technology and skills, while careful use of renewables and wise use of non-renewables help stretch them for longer.</p>
+                    </div>
+                    <div class="question-paper">
+                        <h4>Questions and Activities</h4>
+                        <ol>
+                            <li>What can make what is today a renewable resource non-renewable tomorrow? Describe actions that can prevent this.</li>
+                            <li>Name five ecosystem functions that serve humans.</li>
+                            <li>What are renewable resources? How are they different from non-renewable ones? Give two examples for sustainable use.</li>
+                            <li>Identify cultural practices in your home and neighbourhood that point to mindful use of natural resources.</li>
+                            <li>What considerations should be kept in mind in the production of goods for current use?</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="lang-hi-block">
+                    <div class="review-summary">
+                        <span class="review-heading">Before We Move On ...</span>
+                        <p>प्राकृतिक संसाधन वे पदार्थ हैं जो प्रकृति में पाए जाते हैं और मनुष्यों के लिए मूल्यवान होते हैं। संसाधनों का वर्गीकरण कई तरीकों से किया जा सकता है, और नवीकरणीय तथा अनवीकरणीय उपयोगी श्रेणियां हैं। तकनीक और कौशल में निवेश से संसाधन-संकट कम किया जा सकता है, और सावधानीपूर्वक उपयोग से संसाधन लंबे समय तक उपलब्ध रहते हैं।</p>
+                    </div>
+                    <div class="question-paper">
+                        <h4>प्रश्न और गतिविधियां</h4>
+                        <ol>
+                            <li>आज का नवीकरणीय संसाधन कल अनवीकरणीय कैसे बन सकता है? इसे रोकने के उपाय लिखिए।</li>
+                            <li>मनुष्यों के लिए उपयोगी पारिस्थितिकी तंत्र के पांच कार्य बताइए।</li>
+                            <li>नवीकरणीय और अनवीकरणीय संसाधनों में अंतर बताकर दो उदाहरण दीजिए।</li>
+                            <li>अपने घर और पड़ोस की ऐसी सांस्कृतिक परंपराएं बताइए जो संसाधनों के सजग उपयोग को दिखाती हों।</li>
+                            <li>वर्तमान उपयोग हेतु वस्तुओं के उत्पादन में किन बातों का ध्यान रखना चाहिए?</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="section-card bilingual-card">
+            <div class="section-header">
+                <span class="s-icon">&#x1F4DD;</span>
+                <h2>
+                    <span class="lang-en-inline">Auto-Check Quiz</span>
+                    <span class="lang-hi-inline">स्वतः जांच क्विज</span>
+                </h2>
+            </div>
+            <div class="section-body">
+                <p>
+                    <span class="lang-en-inline">Answer the questions and click check to get instant feedback with your score.</span>
+                    <span class="lang-hi-inline">प्रश्नों के उत्तर दें और जांच बटन दबाकर तुरंत फीडबैक और स्कोर देखें।</span>
+                </p>
+
+                <form class="quiz-form" id="resourceQuiz">
+                    <div class="quiz-question" data-answer="b">
+                        <h4>
+                            <span class="lang-en-inline">1. Nature becomes a resource when:</span>
+                            <span class="lang-hi-inline">1. प्रकृति संसाधन कब बनती है?</span>
+                        </h4>
+                        <label><input type="radio" name="q1" value="a"> <span class="lang-en-inline">It simply exists in the environment</span><span class="lang-hi-inline">वह केवल पर्यावरण में मौजूद हो</span></label>
+                        <label><input type="radio" name="q1" value="b"> <span class="lang-en-inline">Humans use it to satisfy needs</span><span class="lang-hi-inline">मनुष्य जरूरत पूरी करने के लिए उसका उपयोग करे</span></label>
+                        <label><input type="radio" name="q1" value="c"> <span class="lang-en-inline">It is found underground only</span><span class="lang-hi-inline">वह केवल भूमिगत मिले</span></label>
+                    </div>
+
+                    <div class="quiz-question" data-answer="c">
+                        <h4>
+                            <span class="lang-en-inline">2. Which of the following is non-renewable?</span>
+                            <span class="lang-hi-inline">2. निम्न में से कौन सा अनवीकरणीय संसाधन है?</span>
+                        </h4>
+                        <label><input type="radio" name="q2" value="a"> <span class="lang-en-inline">Wind</span><span class="lang-hi-inline">पवन</span></label>
+                        <label><input type="radio" name="q2" value="b"> <span class="lang-en-inline">Sunlight</span><span class="lang-hi-inline">सूर्य प्रकाश</span></label>
+                        <label><input type="radio" name="q2" value="c"> <span class="lang-en-inline">Coal</span><span class="lang-hi-inline">कोयला</span></label>
+                    </div>
+
+                    <div class="quiz-question" data-answer="a">
+                        <h4>
+                            <span class="lang-en-inline">3. Sustainable development means:</span>
+                            <span class="lang-hi-inline">3. सतत विकास का अर्थ है:</span>
+                        </h4>
+                        <label><input type="radio" name="q3" value="a"> <span class="lang-en-inline">Meeting present needs without harming future generations</span><span class="lang-hi-inline">वर्तमान जरूरतें पूरी करना, भविष्य की पीढ़ियों को नुकसान पहुंचाए बिना</span></label>
+                        <label><input type="radio" name="q3" value="b"> <span class="lang-en-inline">Using all resources quickly</span><span class="lang-hi-inline">सभी संसाधनों का जल्दी उपयोग कर लेना</span></label>
+                        <label><input type="radio" name="q3" value="c"> <span class="lang-en-inline">Avoiding all technology</span><span class="lang-hi-inline">सारी तकनीक से बचना</span></label>
+                    </div>
+
+                    <button type="button" class="quiz-submit" id="checkQuizBtn">
+                        <span class="lang-en-inline">Check My Answers</span>
+                        <span class="lang-hi-inline">मेरे उत्तर जांचें</span>
+                    </button>
+                </form>
+
+                <div class="quiz-result" id="quizResult" aria-live="polite"></div>
+                <div class="quiz-explanations" id="quizExplanations"></div>
+                <div class="score-track" aria-hidden="true">
+                    <div class="score-fill" id="scoreFill"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section-card bilingual-card" id="worksheetSection">
+            <div class="section-header">
+                <span class="s-icon">&#x1F5D2;&#xFE0F;</span>
+                <h2>
+                    <span class="lang-en-inline">Printable Worksheet</span>
+                    <span class="lang-hi-inline">प्रिंट योग्य वर्कशीट</span>
+                </h2>
+            </div>
+            <div class="section-body">
+                <div class="worksheet-meta">
+                    <span><strong><span class="lang-en-inline">Name</span><span class="lang-hi-inline">नाम</span>:</strong> ____________________</span>
+                    <span><strong><span class="lang-en-inline">Class/Section</span><span class="lang-hi-inline">कक्षा/सेक्शन</span>:</strong> ____________________</span>
+                    <span><strong><span class="lang-en-inline">Date</span><span class="lang-hi-inline">तारीख</span>:</strong> ____________________</span>
+                </div>
+
+                <div class="worksheet-sheet">
+                    <div class="worksheet-block">
+                        <h4><span class="lang-en-inline">A. Fill in the blanks</span><span class="lang-hi-inline">A. रिक्त स्थान भरें</span></h4>
+                        <p>1. <span class="lang-en-inline">Nature becomes a resource due to its ________.</span><span class="lang-hi-inline">प्रकृति अपनी ________ के कारण संसाधन बनती है।</span></p>
+                        <p>2. <span class="lang-en-inline">Coal and petroleum are ________ resources.</span><span class="lang-hi-inline">कोयला और पेट्रोलियम ________ संसाधन हैं।</span></p>
+                        <p>3. <span class="lang-en-inline">Sustainable development protects ________ generations.</span><span class="lang-hi-inline">सतत विकास ________ पीढ़ियों की रक्षा करता है।</span></p>
+                    </div>
+
+                    <div class="worksheet-block">
+                        <h4><span class="lang-en-inline">B. Short Answer (2-3 lines each)</span><span class="lang-hi-inline">B. लघु उत्तर (प्रत्येक 2-3 पंक्तियां)</span></h4>
+                        <p>1. <span class="lang-en-inline">How does technology increase resource value?</span><span class="lang-hi-inline">तकनीक संसाधनों का मूल्य कैसे बढ़ाती है?</span></p>
+                        <div class="blank-lines"></div>
+                        <p>2. <span class="lang-en-inline">Differentiate between biotic and abiotic resources.</span><span class="lang-hi-inline">जैविक और अजैविक संसाधनों में अंतर लिखें।</span></p>
+                        <div class="blank-lines"></div>
+                    </div>
+
+                    <div class="worksheet-block">
+                        <h4><span class="lang-en-inline">C. Long Answer</span><span class="lang-hi-inline">C. दीर्घ उत्तर</span></h4>
+                        <p><span class="lang-en-inline">Explain why conservation is necessary for sustainable development with one local example.</span><span class="lang-hi-inline">एक स्थानीय उदाहरण सहित बताइए कि सतत विकास के लिए संरक्षण क्यों आवश्यक है।</span></p>
+                        <div class="blank-lines" style="min-height:160px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /sections -->
+
+
+
+</main>
+
+<!-- Quote meaning modal -->
+<div class="modal-overlay" id="quoteModal" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal">
+        <button class="modal-close" onclick="document.getElementById('quoteModal').classList.remove('open')" aria-label="Close">&#10005;</button>
+        <h3>इसका क्या अर्थ है? &#x1F30D;</h3>
+        <p>Hamare Social Scientists ka yeh thought, present time ki <strong>'उपभोग करो और फेंको'</strong> means <em>'Use and Throw'</em> waali mentality ko badalne par jor deta hai. Iske main points hain:</p>
+        <ul style="margin: 12px 0 12px 18px; padding: 0; list-style: none; display: grid; gap: 10px;">
+            <li style="color:#4c1313; font-size:0.92rem; line-height:1.75;"><strong>&#x1F331; पुनर्योजी अर्थव्यवस्था (Regenerative Economy):</strong> इसका अर्थ है ऐसी व्यवस्था जहां हम प्रकृति से केवल लेते ही नहीं, बल्कि उसे वापस भी देते हैं। जैसे मिट्टी की उर्वरता बढ़ाना और जंगलों को फिर से उगाना।</li>
+            <li style="color:#4c1313; font-size:0.92rem; line-height:1.75;"><strong>&#x1F91D; प्रकृति के साथ तालमेल:</strong> हमें अपनी जीवनशैली और उद्योगों को प्राकृतिक चक्रों के अनुरूप ढालना होगा।</li>
+            <li style="color:#4c1313; font-size:0.92rem; line-height:1.75;"><strong>&#x267B;&#xFE0F; संसाधनों का पुनः उपयोग:</strong> कचरे को कम करके, पुनः उपयोग और पुनर्चक्रण को बढ़ाना जरूरी है।</li>
+            <li style="color:#4c1313; font-size:0.92rem; line-height:1.75;"><strong>&#x1F343; प्रकृति से सीखना:</strong> प्रकृति में कुछ भी व्यर्थ नहीं जाता। हमें इसी बुद्धिमत्ता को अपने व्यवहार और विकास मॉडल में अपनाना चाहिए।</li>
+        </ul>
+        <p><strong>&#x1F4CC; निष्कर्ष:</strong> भविष्य सुरक्षित करने के लिए हमें प्रकृति के मालिक नहीं, बल्कि उसके हिस्सेदार बनकर जीना होगा।</p>
+    </div>
+</div>
+
+<a class="chatbot-fab" href="dashboard.html?openBirbal=1" aria-label="Ask Birbal" title="Ask Birbal">&#x1F916;</a>
+
+<script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const bodyElement = document.body;
+    const printWorksheetButton = document.getElementById('printWorksheetBtn');
+
+    langButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const selectedLang = button.getAttribute('data-lang');
+            bodyElement.setAttribute('data-lang', selectedLang);
+            langButtons.forEach((btn) => btn.classList.remove('active'));
+            button.classList.add('active');
+        });
+    });
+
+    printWorksheetButton.addEventListener('click', () => {
+        window.print();
+    });
+
+    const quizButton = document.getElementById('checkQuizBtn');
+    const quizResult = document.getElementById('quizResult');
+    const quizExplanations = document.getElementById('quizExplanations');
+    const scoreFill = document.getElementById('scoreFill');
+
+    quizButton.addEventListener('click', () => {
+        const answerKey = { q1: 'b', q2: 'c', q3: 'a' };
+        const explanations = {
+            q1: {
+                en: 'Correct answer is option B because an element of nature becomes a resource only when humans use it to satisfy a need.',
+                hi: 'सही उत्तर विकल्प B है, क्योंकि प्रकृति का कोई तत्व तभी संसाधन बनता है जब मनुष्य उसका उपयोग अपनी आवश्यकता पूरी करने के लिए करे।'
+            },
+            q2: {
+                en: 'Correct answer is option C because coal takes millions of years to form, so it cannot be renewed quickly.',
+                hi: 'सही उत्तर विकल्प C है, क्योंकि कोयला बनने में लाखों वर्ष लगते हैं और इसे जल्दी पुनः प्राप्त नहीं किया जा सकता।'
+            },
+            q3: {
+                en: 'Correct answer is option A because sustainable development balances present needs with future protection.',
+                hi: 'सही उत्तर विकल्प A है, क्योंकि सतत विकास वर्तमान जरूरतों और भविष्य की सुरक्षा के बीच संतुलन बनाता है।'
+            }
+        };
+
+        let correct = 0;
+        let answered = 0;
+
+        Object.keys(answerKey).forEach((questionName) => {
+            const picked = document.querySelector(`input[name="${questionName}"]:checked`);
+            if (picked) {
+                answered += 1;
+                if (picked.value === answerKey[questionName]) {
+                    correct += 1;
+                }
+            }
+        });
+
+        const total = Object.keys(answerKey).length;
+        const scorePercent = Math.round((correct / total) * 100);
+        scoreFill.style.width = `${scorePercent}%`;
+        quizResult.style.display = 'block';
+
+        const isHindi = bodyElement.getAttribute('data-lang') === 'hi';
+        if (answered < total) {
+            quizResult.innerHTML = isHindi
+                ? `कृपया सभी ${total} प्रश्नों का उत्तर दें। अभी आपने ${answered} प्रश्न पूरे किए हैं।`
+                : `Please answer all ${total} questions. You have completed ${answered} so far.`;
+            quizExplanations.innerHTML = '';
+            return;
+        }
+
+        const messageEn = `Score: ${correct}/${total} (${scorePercent}%). ${correct === total ? 'Excellent work!' : correct === 2 ? 'Good effort. Revise one concept and try again.' : 'Review the chapter recap and try once more.'}`;
+        const messageHi = `स्कोर: ${correct}/${total} (${scorePercent}%). ${correct === total ? 'बहुत बढ़िया!' : correct === 2 ? 'अच्छा प्रयास। एक अवधारणा दोहराकर फिर कोशिश करें।' : 'अध्याय का सारांश दोहराएं और फिर प्रयास करें।'}`;
+
+        quizResult.innerHTML = isHindi ? messageHi : messageEn;
+
+        const explanationHTML = Object.keys(answerKey).map((questionName, index) => {
+            const picked = document.querySelector(`input[name="${questionName}"]:checked`);
+            const isCorrect = picked && picked.value === answerKey[questionName];
+            const statusEn = isCorrect ? 'Correct' : 'Needs Revision';
+            const statusHi = isCorrect ? 'सही' : 'दोबारा देखें';
+            const whyText = isHindi ? explanations[questionName].hi : explanations[questionName].en;
+
+            return `
+                <div class="quiz-explanation">
+                    <strong>${isHindi ? 'प्रश्न' : 'Question'} ${index + 1}:</strong>
+                    ${isHindi ? statusHi : statusEn}
+                    <br>
+                    ${whyText}
+                </div>
+            `;
+        }).join('');
+
+        quizExplanations.innerHTML = explanationHTML;
+    });
+
+    const updateControlLanguage = () => {
+        const isHindi = bodyElement.getAttribute('data-lang') === 'hi';
+        printWorksheetButton.textContent = isHindi ? 'वर्कशीट प्रिंट करें' : 'Print Worksheet';
+    };
+
+    langButtons.forEach((button) => {
+        button.addEventListener('click', updateControlLanguage);
+    });
+
+    updateControlLanguage();
+</script>
+
+</body>
+</html>
+
+

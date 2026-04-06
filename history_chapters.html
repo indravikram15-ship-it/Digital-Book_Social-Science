@@ -1,0 +1,390 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Pasts | Chapter Tabs</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --bg1: #050510;
+            --bg2: #1a1b3a;
+            --card: rgba(255, 255, 255, 0.07);
+            --line: rgba(255, 255, 255, 0.18);
+            --gold: #ffd766;
+            --ink: #130a30;
+            --theme-accent: #ffd766;
+            --theme-glow: rgba(255, 215, 102, 0.22);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at 40% 20%, var(--bg2) 0%, var(--bg1) 65%);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -20% -20% auto -20%;
+            height: 70vh;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 215, 102, 0.2) 0%, rgba(255, 215, 102, 0) 70%);
+            filter: blur(14px);
+            animation: pulseGlow 6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .page {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 34px 20px 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            margin: 0;
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 2rem;
+            letter-spacing: 0.04em;
+            text-align: center;
+            text-shadow: 0 0 24px rgba(255, 215, 102, 0.35);
+        }
+
+        .subtitle {
+            margin: 10px 0 28px;
+            text-align: center;
+            opacity: 0.85;
+        }
+
+        .tabs {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin: 0 auto 20px;
+            max-width: 760px;
+        }
+
+        .tab-btn {
+            border: 1px solid var(--line);
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0.08), rgba(255, 215, 102, 0.08));
+            color: #fff;
+            border-radius: 20px;
+            padding: 20px 22px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-btn::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.14) 45%, transparent 70%);
+            transform: translateX(-120%);
+            transition: transform 0.45s ease;
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-2px) scale(1.01);
+            border-color: rgba(255, 215, 102, 0.7);
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0.1), rgba(255, 215, 102, 0.18));
+            box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35), 0 0 24px rgba(255, 215, 102, 0.2);
+        }
+
+        .tab-btn:hover::after {
+            transform: translateX(120%);
+        }
+
+        .tab-btn.active {
+            border-color: var(--gold);
+            background: linear-gradient(120deg, rgba(255, 215, 102, 0.25), rgba(255, 255, 255, 0.14));
+            color: #fff;
+            box-shadow: 0 0 0 1px rgba(255, 215, 102, 0.4), 0 24px 52px rgba(0, 0, 0, 0.4), 0 0 32px rgba(255, 215, 102, 0.25);
+        }
+
+        .tab-btn.theme-map.active {
+            border-color: #7fd3ff;
+            background: linear-gradient(120deg, rgba(127, 211, 255, 0.28), rgba(255, 255, 255, 0.12));
+            box-shadow: 0 0 0 1px rgba(127, 211, 255, 0.45), 0 24px 52px rgba(0, 0, 0, 0.4), 0 0 32px rgba(127, 211, 255, 0.28);
+        }
+
+        .tab-btn.theme-maratha.active {
+            border-color: #ff9f7a;
+            background: linear-gradient(120deg, rgba(255, 159, 122, 0.3), rgba(255, 255, 255, 0.12));
+            box-shadow: 0 0 0 1px rgba(255, 159, 122, 0.45), 0 24px 52px rgba(0, 0, 0, 0.4), 0 0 32px rgba(255, 159, 122, 0.28);
+        }
+
+        .tab-btn.theme-colonial.active {
+            border-color: #c6b8ff;
+            background: linear-gradient(120deg, rgba(198, 184, 255, 0.28), rgba(255, 255, 255, 0.12));
+            box-shadow: 0 0 0 1px rgba(198, 184, 255, 0.45), 0 24px 52px rgba(0, 0, 0, 0.4), 0 0 32px rgba(198, 184, 255, 0.28);
+        }
+
+        .tab-icon {
+            min-width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 2.2rem;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.38);
+            box-shadow: inset 0 -8px 16px rgba(0, 0, 0, 0.28), 0 10px 24px rgba(0, 0, 0, 0.3), 0 0 16px rgba(255, 255, 255, 0.15);
+        }
+
+        .tab-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            flex: 1;
+        }
+
+        .tab-title {
+            display: block;
+            font-size: 1.12rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+        }
+
+        .enter-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .enter-btn:hover {
+            transform: translateY(-2px) scale(1.04);
+        }
+
+        .tab-btn.theme-map .enter-btn {
+            background: linear-gradient(135deg, #2a7fbf, #7fd3ff);
+            color: #06132b;
+            box-shadow: 0 4px 18px rgba(127, 211, 255, 0.4);
+        }
+
+        .tab-btn.theme-map .enter-btn:hover {
+            box-shadow: 0 6px 24px rgba(127, 211, 255, 0.6);
+        }
+
+        .tab-btn.theme-maratha .enter-btn {
+            background: linear-gradient(135deg, #b05c30, #ff9f7a);
+            color: #1e0800;
+            box-shadow: 0 4px 18px rgba(255, 159, 122, 0.4);
+        }
+
+        .tab-btn.theme-maratha .enter-btn:hover {
+            box-shadow: 0 6px 24px rgba(255, 159, 122, 0.6);
+        }
+
+        .tab-btn.theme-colonial .enter-btn {
+            background: linear-gradient(135deg, #7a6bbf, #c6b8ff);
+            color: #0e0a2a;
+            box-shadow: 0 4px 18px rgba(198, 184, 255, 0.4);
+        }
+
+        .tab-btn.theme-colonial .enter-btn:hover {
+            box-shadow: 0 6px 24px rgba(198, 184, 255, 0.6);
+        }
+
+        .panel {
+            display: none;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 24px;
+            background: rgba(10, 11, 28, 0.8);
+            backdrop-filter: blur(8px);
+        }
+
+        .panel.active {
+            display: block;
+            border-color: color-mix(in srgb, var(--theme-accent) 45%, var(--line));
+            box-shadow: 0 0 0 1px color-mix(in srgb, var(--theme-accent) 32%, transparent), 0 0 44px var(--theme-glow);
+        }
+
+        .panel.theme-map {
+            --theme-accent: #7fd3ff;
+            --theme-glow: rgba(127, 211, 255, 0.2);
+        }
+
+        .panel.theme-maratha {
+            --theme-accent: #ff9f7a;
+            --theme-glow: rgba(255, 159, 122, 0.2);
+        }
+
+        .panel.theme-colonial {
+            --theme-accent: #c6b8ff;
+            --theme-glow: rgba(198, 184, 255, 0.2);
+        }
+
+        .panel h2 {
+            margin-top: 0;
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+        }
+
+        .note {
+            padding: 14px 16px;
+            border-left: 4px solid var(--gold);
+            background: rgba(255, 215, 102, 0.1);
+            border-radius: 8px;
+            color: #f7f2df;
+        }
+
+        ul {
+            margin: 14px 0 0;
+            padding-left: 20px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 760px) {
+            .tab-btn {
+                padding: 16px;
+            }
+
+            .tab-title {
+                font-size: 1rem;
+            }
+        }
+
+        .chatbot-fab {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 64px;
+            height: 64px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: radial-gradient(circle at 30% 30%, #ffe6a8, #ffc04d 62%, #e59225 100%);
+            box-shadow: 0 16px 28px rgba(0, 0, 0, 0.3), 0 0 26px rgba(255, 192, 77, 0.36);
+            color: #2b1c00;
+            font-size: 1.9rem;
+            cursor: pointer;
+            z-index: 20;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+        }
+
+        .chatbot-fab:hover {
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 20px 34px rgba(0, 0, 0, 0.35), 0 0 34px rgba(255, 192, 77, 0.5);
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.65; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(10px); }
+        }
+
+    </style>
+    <link rel="stylesheet" href="assets/responsive.css">
+</head>
+<body>
+
+<main class="page">
+    <h1>Our Pasts</h1>
+    <p class="subtitle">Choose a chapter tab to explore the topic.</p>
+
+    <section class="tabs" aria-label="History chapter tabs">
+        <button class="tab-btn theme-map active" onclick="showTab('ch2', this)">
+            <span class="tab-icon" aria-hidden="true">&#x1F5FA;&#xFE0F;</span>
+            <span class="tab-text">
+                <span class="tab-title">Chapter 2: Reshaping India's Political Map</span>
+            </span>
+            <a class="enter-btn" href="history_ch2.html" onclick="event.stopPropagation()">Enter &#8594;</a>
+        </button>
+        <button class="tab-btn theme-maratha" onclick="showTab('ch3', this)">
+            <span class="tab-icon" aria-hidden="true">&#x1F40E;</span>
+            <span class="tab-text">
+                <span class="tab-title">Chapter 3: The Rise of the Marathas</span>
+            </span>
+            <a class="enter-btn" href="history_ch3.html" onclick="event.stopPropagation()">Enter &#8594;</a>
+        </button>
+        <button class="tab-btn theme-colonial" onclick="showTab('ch4', this)">
+            <span class="tab-icon" aria-hidden="true">&#x1F3DB;&#xFE0F;</span>
+            <span class="tab-text">
+                <span class="tab-title">Chapter 4: The Colonial Era in India</span>
+            </span>
+            <a class="enter-btn" href="history_ch4.html" onclick="event.stopPropagation()">Enter &#8594;</a>
+        </button>
+    </section>
+
+    <section id="ch2" class="panel theme-map active">
+        <h2>Chapter 2: Reshaping India's Political Map</h2>
+        <p class="note">This chapter tracks how territorial boundaries and political power shifted across regions in India.</p>
+        <ul>
+            <li>Changing regional powers and administrative control.</li>
+            <li>Political alliances, conflicts, and consolidation of authority.</li>
+            <li>How map boundaries reflected deeper social and political transitions.</li>
+        </ul>
+    </section>
+
+    <section id="ch3" class="panel theme-maratha">
+        <h2>Chapter 3: The Rise of the Marathas</h2>
+        <p class="note">This chapter highlights the emergence, expansion, and influence of the Maratha power in Indian history.</p>
+        <ul>
+            <li>Key leaders and the role of regional military strategy.</li>
+            <li>Expansion of Maratha influence beyond the Deccan.</li>
+            <li>Administrative and political impact on the subcontinent.</li>
+        </ul>
+    </section>
+
+    <section id="ch4" class="panel theme-colonial">
+        <h2>Chapter 4: The Colonial Era in India</h2>
+        <p class="note">This chapter focuses on colonial expansion, governance, and the resulting changes in Indian society and economy.</p>
+        <ul>
+            <li>Growth of colonial institutions and economic policies.</li>
+            <li>Effects on local rulers, farmers, artisans, and trade systems.</li>
+            <li>Early social and political responses to colonial rule.</li>
+        </ul>
+    </section>
+</main>
+
+<a class="chatbot-fab" href="dashboard.html?openBirbal=1" aria-label="Ask Birbal" title="Ask Birbal">&#x1F916;</a>
+
+<script>
+    function showTab(id, button) {
+        document.querySelectorAll('.panel').forEach((panel) => {
+            panel.classList.remove('active');
+        });
+        document.querySelectorAll('.tab-btn').forEach((tab) => {
+            tab.classList.remove('active');
+        });
+
+        document.getElementById(id).classList.add('active');
+        button.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
+
+

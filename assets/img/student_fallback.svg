@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="Student fallback illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#163b74"/>
+      <stop offset="100%" stop-color="#2f7bd6"/>
+    </linearGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9fd0ff"/>
+      <stop offset="100%" stop-color="#5ea7f7"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="320" height="320" rx="36" fill="url(#bg)"/>
+  <circle cx="160" cy="114" r="58" fill="#f2c8a0"/>
+  <path d="M102 98c6-36 118-36 116 0-5-15-22-30-58-30s-53 15-58 30z" fill="#1a2333"/>
+  <path d="M80 280c9-55 49-84 80-84s71 29 80 84" fill="url(#shirt)"/>
+  <path d="M118 194l42 40 42-40" fill="#ffffff" opacity="0.85"/>
+  <circle cx="138" cy="113" r="6" fill="#2a1c12"/>
+  <circle cx="182" cy="113" r="6" fill="#2a1c12"/>
+  <path d="M136 142c13 11 35 11 48 0" stroke="#7e3f2c" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <text x="160" y="304" text-anchor="middle" fill="#dbeeff" font-family="Poppins, Arial, sans-serif" font-size="18">Student</text>
+</svg>
