@@ -208,6 +208,10 @@
         }
 
         .birbal-toggle {
+            display: none;
+        }
+
+        .birbal-toggle {
             display: flex;
             align-items: center;
             gap: 12px;
@@ -233,6 +237,10 @@
 
         .birbal-toggle:hover > div {
             opacity: 1;
+        }
+
+        .birbal-widget .birbal-toggle {
+            display: none !important;
         }
 
         .birbal-icon {
@@ -494,6 +502,8 @@
     </a>
 </div>
 
+<a class="chatbot-fab" href="dashboard.html?openBirbal=1" data-chatbot-inline="1" aria-label="Ask Birbal" title="Ask Birbal">&#x1F916;</a>
+
 <div class="birbal-widget">
     <div class="birbal-toggle" onclick="toggleBirbalChat()">
         <div class="birbal-icon">
@@ -525,7 +535,7 @@
             <button class="close-btn" onclick="toggleBirbalChat()">&times;</button>
         </div>
         <div class="message-list" id="messageList">
-            <div class="message bot">Jahanpanah, ask your question and I shall answer with wit.</div>
+            <div class="message bot">Jahanpanah ! Ask your question and I shall answer with wit.</div>
         </div>
         <div class="message-input">
             <input id="birbalInput" placeholder="Type your question..." onkeypress="birbalChat(event)">
@@ -533,6 +543,7 @@
     </div>
 </div>
 
+<script src="assets/chatbot-widget.js"></script>
 <script>
     function toggleBirbalChat() {
         document.getElementById('birbalPanel').classList.toggle('open');
