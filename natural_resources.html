@@ -271,6 +271,7 @@
         .study-tab.tab-activity { background: linear-gradient(135deg, rgba(112, 220, 130, 0.45), rgba(35, 121, 51, 0.45)); }
         .study-tab.tab-flash { background: linear-gradient(135deg, rgba(255, 126, 162, 0.45), rgba(161, 42, 90, 0.45)); }
         .study-tab.tab-quiz { background: linear-gradient(135deg, rgba(255, 96, 96, 0.45), rgba(171, 35, 35, 0.45)); }
+        .study-tab.tab-worksheet { background: linear-gradient(135deg, rgba(106, 210, 202, 0.45), rgba(22, 118, 128, 0.45)); }
 
         .study-panel {
             display: none;
@@ -296,23 +297,83 @@
 
         .flash-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 12px;
             margin-top: 10px;
         }
 
         .flash-card {
-            border: 1px solid rgba(255, 255, 255, 0.22);
-            border-radius: 12px;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.06);
+            perspective: 1100px;
+            min-height: 170px;
         }
 
-        .flash-card strong {
-            display: block;
-            color: #ffdca8;
-            margin-bottom: 6px;
+        .flash-card-inner {
+            position: relative;
+            width: 100%;
+            min-height: 170px;
+            transform-style: preserve-3d;
+            transition: transform 0.55s ease;
         }
+
+        .flash-card:hover .flash-card-inner,
+        .flash-card:focus-within .flash-card-inner,
+        .flash-card:focus .flash-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flash-face {
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            padding: 12px;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.24);
+        }
+
+        .flash-front {
+            align-items: flex-start;
+            gap: 8px;
+            color: #fefcf7;
+        }
+
+        .flash-front span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.74rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 255, 255, 0.32);
+            background: rgba(0, 0, 0, 0.18);
+        }
+
+        .flash-front strong {
+            font-size: 0.98rem;
+            line-height: 1.35;
+        }
+
+        .flash-back {
+            transform: rotateY(180deg);
+            background: rgba(13, 33, 44, 0.9);
+            color: #e8fbff;
+            line-height: 1.6;
+            font-size: 0.88rem;
+        }
+
+        .flash-card.tone-water .flash-front { background: linear-gradient(135deg, #2187a6, #34b8ce); }
+        .flash-card.tone-energy .flash-front { background: linear-gradient(135deg, #df7c1f, #f0b332); }
+        .flash-card.tone-forest .flash-front { background: linear-gradient(135deg, #2d8a43, #4ec074); }
+        .flash-card.tone-earth .flash-front { background: linear-gradient(135deg, #8f6236, #c18b55); }
+        .flash-card.tone-policy .flash-front { background: linear-gradient(135deg, #5d66d6, #8b90ed); }
+        .flash-card.tone-alert .flash-front { background: linear-gradient(135deg, #b43d41, #de6666); }
+        .flash-card.tone-tech .flash-front { background: linear-gradient(135deg, #6d5cae, #9b81de); }
+        .flash-card.tone-community .flash-front { background: linear-gradient(135deg, #1f7e8a, #3ca7b4); }
 
         .quiz12-form {
             display: grid;
@@ -1200,12 +1261,13 @@
                 visibility: hidden !important;
             }
 
-            #worksheetSection,
-            #worksheetSection * {
+            #worksheetPanel,
+            #worksheetPanel * {
                 visibility: visible !important;
             }
 
-            #worksheetSection {
+            #worksheetPanel {
+                display: block !important;
                 position: absolute;
                 inset: 0;
                 margin: 0;
@@ -1216,10 +1278,10 @@
                 box-shadow: none;
             }
 
-            #worksheetSection .section-header,
-            #worksheetSection .section-body,
-            #worksheetSection .worksheet-block,
-            #worksheetSection .worksheet-meta span {
+            #worksheetPanel .worksheet-block,
+            #worksheetPanel .worksheet-meta span,
+            #worksheetPanel h3,
+            #worksheetPanel p {
                 color: #000 !important;
                 border-color: #666 !important;
                 background: #fff !important;
@@ -1557,7 +1619,6 @@
     <div class="lang-controls" aria-label="Language switcher">
         <button type="button" class="lang-btn active" data-lang="en">English</button>
         <button type="button" class="lang-btn" data-lang="hi">हिंदी</button>
-        <button type="button" class="tool-btn" id="printWorksheetBtn">Print Worksheet</button>
     </div>
 
     <div class="section-card" id="learningHubSection">
@@ -1573,6 +1634,7 @@
                 <button class="study-tab tab-activity" type="button" data-tab="activityPanel"><span class="tab-badge">🎯</span><span class="tab-label-text">Learn &amp; Fun Activities</span></button>
                 <button class="study-tab tab-flash" type="button" data-tab="flashPanel"><span class="tab-badge">🧠</span><span class="tab-label-text">Flash Cards</span></button>
                 <button class="study-tab tab-quiz" type="button" data-tab="quizPanel12"><span class="tab-badge">❓</span><span class="tab-label-text">Auto-Check Quiz</span></button>
+                <button class="study-tab tab-worksheet" type="button" data-tab="worksheetPanel"><span class="tab-badge">🧾</span><span class="tab-label-text">Printable Worksheet</span></button>
             </div>
 
             <div class="study-panel active" id="summaryPanel">
@@ -1614,12 +1676,78 @@
             <div class="study-panel" id="flashPanel">
                 <h3>Flash Cards</h3>
                 <div class="flash-grid">
-                    <div class="flash-card"><strong>Renewable</strong>Resources that replenish naturally in a shorter time.</div>
-                    <div class="flash-card"><strong>Non-Renewable</strong>Resources formed over millions of years; limited stock.</div>
-                    <div class="flash-card"><strong>Stewardship</strong>Responsible use and protection of natural systems.</div>
-                    <div class="flash-card"><strong>Sustainable Use</strong>Meeting needs today without harming future generations.</div>
-                    <div class="flash-card"><strong>Conservation</strong>Planned protection and careful management of resources.</div>
-                    <div class="flash-card"><strong>Biodiversity</strong>Variety of life forms supporting ecosystem balance.</div>
+                    <div class="flash-card tone-water" tabindex="0">
+                        <div class="flash-card-inner">
+                            <div class="flash-face flash-front"><span>Topic</span><strong>Nature to Resource</strong></div>
+                            <div class="flash-face flash-back">Nature becomes a resource only when humans can access it, have the skill to use it, and find it economically and culturally acceptable.</div>
+                        </div>
+                    </div>
+                    <div class="flash-card tone-energy" tabindex="0">
+                        <div class="flash-card-inner">
+                            <div class="flash-face flash-front"><span>Topic</span><strong>Renewable Resources</strong></div>
+                            <div class="flash-face flash-back">These resources regenerate naturally in a short period, such as solar, wind, and flowing water, but still require careful management.</div>
+                        </div>
+                    </div>
+                    <div class="flash-card tone-earth" tabindex="0">
+                        <div class="flash-card-inner">
+                            <div class="flash-face flash-front"><span>Topic</span><strong>Non-Renewable Resources</strong></div>
+                            <div class="flash-face flash-back">Coal, petroleum, and many minerals take millions of years to form. Overuse today can create scarcity for future generations.</div>
+                        </div>
+                    </div>
+                    <div class="flash-card tone-forest" tabindex="0">
+                        <div class="flash-card-inner">
+                            <div class="flash-face flash-front"><span>Topic</span><strong>Resource for Life</strong></div>
+                            <div class="flash-face flash-back">Air, water, and fertile soil are life-supporting resources. Without them, human health, agriculture, and ecosystems collapse.</div>
+                        </div>
+                    </div>
+                    <div class="flash-card tone-policy" tabindex="0">
+                        <div class="flash-card-inner">
+                            <div class="flash-face flash-front"><span>Topic</span><strong>Resource for Material</strong></div>
+                            <div class="flash-face flash-back">Wood, fibres, stones, and metals become material resources used to build homes, tools, transport systems, and public infrastructure.</div>
+                        </div>
+                    </div>
+                    <div class="flash-card tone-alert" tabindex="0">
+                        <div class="flash-card-inner">
+                            <div class="flash-face flash-front"><span>Topic</span><strong>Resource for Energy</strong></div>
+                            <div class="flash-face flash-back">Energy resources run industries and daily life. Balanced use of fossil fuels and renewables reduces pollution and long-term stress.</div>
+                        </div>
+                    </div>
+                    <div class="flash-card tone-tech" tabindex="0">
+                        <div class="flash-card-inner">
+                            <div class="flash-face flash-front"><span>Topic</span><strong>Stewardship</strong></div>
+                            <div class="flash-face flash-back">Stewardship means responsible, long-term care of natural systems by communities, governments, and individuals through rules and mindful behavior.</div>
+                        </div>
+                    </div>
+                    <div class="flash-card tone-community" tabindex="0">
+                        <div class="flash-card-inner">
+                            <div class="flash-face flash-front"><span>Topic</span><strong>Sustainable Development</strong></div>
+                            <div class="flash-face flash-back">Development must meet present needs while protecting future needs through efficient use, conservation, recycling, and ecosystem restoration.</div>
+                        </div>
+                    </div>
+                    <div class="flash-card tone-water" tabindex="0">
+                        <div class="flash-card-inner">
+                            <div class="flash-face flash-front"><span>Topic</span><strong>Groundwater Balance</strong></div>
+                            <div class="flash-face flash-back">Groundwater extraction should not exceed recharge. Rainwater harvesting and watershed planning help maintain this balance.</div>
+                        </div>
+                    </div>
+                    <div class="flash-card tone-energy" tabindex="0">
+                        <div class="flash-card-inner">
+                            <div class="flash-face flash-front"><span>Topic</span><strong>Biodiversity</strong></div>
+                            <div class="flash-face flash-back">Biodiversity supports pollination, food webs, climate resilience, and medicinal value. Habitat destruction weakens all ecosystem services.</div>
+                        </div>
+                    </div>
+                    <div class="flash-card tone-forest" tabindex="0">
+                        <div class="flash-card-inner">
+                            <div class="flash-face flash-front"><span>Topic</span><strong>Traditional Knowledge</strong></div>
+                            <div class="flash-face flash-back">Community practices like sacred groves, seasonal fishing rules, and mixed farming preserve resources with low ecological damage.</div>
+                        </div>
+                    </div>
+                    <div class="flash-card tone-policy" tabindex="0">
+                        <div class="flash-card-inner">
+                            <div class="flash-face flash-front"><span>Topic</span><strong>3R Principle</strong></div>
+                            <div class="flash-face flash-back">Reduce, Reuse, and Recycle lower resource pressure, decrease waste generation, and support a regenerative economy model.</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1642,6 +1770,40 @@
                 </form>
                 <div class="quiz12-result" id="quiz12Result" aria-live="polite"></div>
                 <div class="score12-track"><div class="score12-fill" id="score12Fill"></div></div>
+            </div>
+
+            <div class="study-panel" id="worksheetPanel">
+                <h3>Printable Worksheet</h3>
+                <p>Use this worksheet for written practice, then click the button below to print only this worksheet page.</p>
+                <button type="button" class="tool-btn" id="printWorksheetBtn">Print Worksheet</button>
+                <div class="worksheet-meta">
+                    <span><strong>Name:</strong> ____________________</span>
+                    <span><strong>Class/Section:</strong> ____________________</span>
+                    <span><strong>Date:</strong> ____________________</span>
+                </div>
+
+                <div class="worksheet-sheet">
+                    <div class="worksheet-block">
+                        <h4>A. Fill in the blanks</h4>
+                        <p>1. Nature becomes a resource due to its ________.</p>
+                        <p>2. Coal and petroleum are ________ resources.</p>
+                        <p>3. Sustainable development protects ________ generations.</p>
+                    </div>
+
+                    <div class="worksheet-block">
+                        <h4>B. Short Answer (2-3 lines each)</h4>
+                        <p>1. How does technology increase resource value?</p>
+                        <div class="blank-lines"></div>
+                        <p>2. Differentiate between biotic and abiotic resources.</p>
+                        <div class="blank-lines"></div>
+                    </div>
+
+                    <div class="worksheet-block">
+                        <h4>C. Long Answer</h4>
+                        <p>Explain why conservation is necessary for sustainable development with one local example.</p>
+                        <div class="blank-lines" style="min-height:160px;"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1942,108 +2104,6 @@
                 </div>
             </div>
         </div>
-
-
-        <div class="section-card bilingual-card">
-            <div class="section-header">
-                <span class="s-icon">&#x1F4DD;</span>
-                <h2>
-                    <span class="lang-en-inline">Auto-Check Quiz</span>
-                    <span class="lang-hi-inline">स्वतः जांच क्विज</span>
-                </h2>
-            </div>
-            <div class="section-body">
-                <p>
-                    <span class="lang-en-inline">Answer the questions and click check to get instant feedback with your score.</span>
-                    <span class="lang-hi-inline">प्रश्नों के उत्तर दें और जांच बटन दबाकर तुरंत फीडबैक और स्कोर देखें।</span>
-                </p>
-
-                <form class="quiz-form" id="resourceQuiz">
-                    <div class="quiz-question" data-answer="b">
-                        <h4>
-                            <span class="lang-en-inline">1. Nature becomes a resource when:</span>
-                            <span class="lang-hi-inline">1. प्रकृति संसाधन कब बनती है?</span>
-                        </h4>
-                        <label><input type="radio" name="q1" value="a"> <span class="lang-en-inline">It simply exists in the environment</span><span class="lang-hi-inline">वह केवल पर्यावरण में मौजूद हो</span></label>
-                        <label><input type="radio" name="q1" value="b"> <span class="lang-en-inline">Humans use it to satisfy needs</span><span class="lang-hi-inline">मनुष्य जरूरत पूरी करने के लिए उसका उपयोग करे</span></label>
-                        <label><input type="radio" name="q1" value="c"> <span class="lang-en-inline">It is found underground only</span><span class="lang-hi-inline">वह केवल भूमिगत मिले</span></label>
-                    </div>
-
-                    <div class="quiz-question" data-answer="c">
-                        <h4>
-                            <span class="lang-en-inline">2. Which of the following is non-renewable?</span>
-                            <span class="lang-hi-inline">2. निम्न में से कौन सा अनवीकरणीय संसाधन है?</span>
-                        </h4>
-                        <label><input type="radio" name="q2" value="a"> <span class="lang-en-inline">Wind</span><span class="lang-hi-inline">पवन</span></label>
-                        <label><input type="radio" name="q2" value="b"> <span class="lang-en-inline">Sunlight</span><span class="lang-hi-inline">सूर्य प्रकाश</span></label>
-                        <label><input type="radio" name="q2" value="c"> <span class="lang-en-inline">Coal</span><span class="lang-hi-inline">कोयला</span></label>
-                    </div>
-
-                    <div class="quiz-question" data-answer="a">
-                        <h4>
-                            <span class="lang-en-inline">3. Sustainable development means:</span>
-                            <span class="lang-hi-inline">3. सतत विकास का अर्थ है:</span>
-                        </h4>
-                        <label><input type="radio" name="q3" value="a"> <span class="lang-en-inline">Meeting present needs without harming future generations</span><span class="lang-hi-inline">वर्तमान जरूरतें पूरी करना, भविष्य की पीढ़ियों को नुकसान पहुंचाए बिना</span></label>
-                        <label><input type="radio" name="q3" value="b"> <span class="lang-en-inline">Using all resources quickly</span><span class="lang-hi-inline">सभी संसाधनों का जल्दी उपयोग कर लेना</span></label>
-                        <label><input type="radio" name="q3" value="c"> <span class="lang-en-inline">Avoiding all technology</span><span class="lang-hi-inline">सारी तकनीक से बचना</span></label>
-                    </div>
-
-                    <button type="button" class="quiz-submit" id="checkQuizBtn">
-                        <span class="lang-en-inline">Check My Answers</span>
-                        <span class="lang-hi-inline">मेरे उत्तर जांचें</span>
-                    </button>
-                </form>
-
-                <div class="quiz-result" id="quizResult" aria-live="polite"></div>
-                <div class="quiz-explanations" id="quizExplanations"></div>
-                <div class="score-track" aria-hidden="true">
-                    <div class="score-fill" id="scoreFill"></div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="section-card bilingual-card" id="worksheetSection">
-            <div class="section-header">
-                <span class="s-icon">&#x1F5D2;&#xFE0F;</span>
-                <h2>
-                    <span class="lang-en-inline">Printable Worksheet</span>
-                    <span class="lang-hi-inline">प्रिंट योग्य वर्कशीट</span>
-                </h2>
-            </div>
-            <div class="section-body">
-                <div class="worksheet-meta">
-                    <span><strong><span class="lang-en-inline">Name</span><span class="lang-hi-inline">नाम</span>:</strong> ____________________</span>
-                    <span><strong><span class="lang-en-inline">Class/Section</span><span class="lang-hi-inline">कक्षा/सेक्शन</span>:</strong> ____________________</span>
-                    <span><strong><span class="lang-en-inline">Date</span><span class="lang-hi-inline">तारीख</span>:</strong> ____________________</span>
-                </div>
-
-                <div class="worksheet-sheet">
-                    <div class="worksheet-block">
-                        <h4><span class="lang-en-inline">A. Fill in the blanks</span><span class="lang-hi-inline">A. रिक्त स्थान भरें</span></h4>
-                        <p>1. <span class="lang-en-inline">Nature becomes a resource due to its ________.</span><span class="lang-hi-inline">प्रकृति अपनी ________ के कारण संसाधन बनती है।</span></p>
-                        <p>2. <span class="lang-en-inline">Coal and petroleum are ________ resources.</span><span class="lang-hi-inline">कोयला और पेट्रोलियम ________ संसाधन हैं।</span></p>
-                        <p>3. <span class="lang-en-inline">Sustainable development protects ________ generations.</span><span class="lang-hi-inline">सतत विकास ________ पीढ़ियों की रक्षा करता है।</span></p>
-                    </div>
-
-                    <div class="worksheet-block">
-                        <h4><span class="lang-en-inline">B. Short Answer (2-3 lines each)</span><span class="lang-hi-inline">B. लघु उत्तर (प्रत्येक 2-3 पंक्तियां)</span></h4>
-                        <p>1. <span class="lang-en-inline">How does technology increase resource value?</span><span class="lang-hi-inline">तकनीक संसाधनों का मूल्य कैसे बढ़ाती है?</span></p>
-                        <div class="blank-lines"></div>
-                        <p>2. <span class="lang-en-inline">Differentiate between biotic and abiotic resources.</span><span class="lang-hi-inline">जैविक और अजैविक संसाधनों में अंतर लिखें।</span></p>
-                        <div class="blank-lines"></div>
-                    </div>
-
-                    <div class="worksheet-block">
-                        <h4><span class="lang-en-inline">C. Long Answer</span><span class="lang-hi-inline">C. दीर्घ उत्तर</span></h4>
-                        <p><span class="lang-en-inline">Explain why conservation is necessary for sustainable development with one local example.</span><span class="lang-hi-inline">एक स्थानीय उदाहरण सहित बताइए कि सतत विकास के लिए संरक्षण क्यों आवश्यक है।</span></p>
-                        <div class="blank-lines" style="min-height:160px;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div><!-- /sections -->
 
 
@@ -2082,87 +2142,17 @@
         });
     });
 
-    printWorksheetButton.addEventListener('click', () => {
-        window.print();
-    });
-
-    const quizButton = document.getElementById('checkQuizBtn');
-    const quizResult = document.getElementById('quizResult');
-    const quizExplanations = document.getElementById('quizExplanations');
-    const scoreFill = document.getElementById('scoreFill');
-
-    quizButton.addEventListener('click', () => {
-        const answerKey = { q1: 'b', q2: 'c', q3: 'a' };
-        const explanations = {
-            q1: {
-                en: 'Correct answer is option B because an element of nature becomes a resource only when humans use it to satisfy a need.',
-                hi: 'सही उत्तर विकल्प B है, क्योंकि प्रकृति का कोई तत्व तभी संसाधन बनता है जब मनुष्य उसका उपयोग अपनी आवश्यकता पूरी करने के लिए करे।'
-            },
-            q2: {
-                en: 'Correct answer is option C because coal takes millions of years to form, so it cannot be renewed quickly.',
-                hi: 'सही उत्तर विकल्प C है, क्योंकि कोयला बनने में लाखों वर्ष लगते हैं और इसे जल्दी पुनः प्राप्त नहीं किया जा सकता।'
-            },
-            q3: {
-                en: 'Correct answer is option A because sustainable development balances present needs with future protection.',
-                hi: 'सही उत्तर विकल्प A है, क्योंकि सतत विकास वर्तमान जरूरतों और भविष्य की सुरक्षा के बीच संतुलन बनाता है।'
-            }
-        };
-
-        let correct = 0;
-        let answered = 0;
-
-        Object.keys(answerKey).forEach((questionName) => {
-            const picked = document.querySelector(`input[name="${questionName}"]:checked`);
-            if (picked) {
-                answered += 1;
-                if (picked.value === answerKey[questionName]) {
-                    correct += 1;
-                }
-            }
+    if (printWorksheetButton) {
+        printWorksheetButton.addEventListener('click', () => {
+            window.print();
         });
-
-        const total = Object.keys(answerKey).length;
-        const scorePercent = Math.round((correct / total) * 100);
-        scoreFill.style.width = `${scorePercent}%`;
-        quizResult.style.display = 'block';
-
-        const isHindi = bodyElement.getAttribute('data-lang') === 'hi';
-        if (answered < total) {
-            quizResult.innerHTML = isHindi
-                ? `कृपया सभी ${total} प्रश्नों का उत्तर दें। अभी आपने ${answered} प्रश्न पूरे किए हैं।`
-                : `Please answer all ${total} questions. You have completed ${answered} so far.`;
-            quizExplanations.innerHTML = '';
-            return;
-        }
-
-        const messageEn = `Score: ${correct}/${total} (${scorePercent}%). ${correct === total ? 'Excellent work!' : correct === 2 ? 'Good effort. Revise one concept and try again.' : 'Review the chapter recap and try once more.'}`;
-        const messageHi = `स्कोर: ${correct}/${total} (${scorePercent}%). ${correct === total ? 'बहुत बढ़िया!' : correct === 2 ? 'अच्छा प्रयास। एक अवधारणा दोहराकर फिर कोशिश करें।' : 'अध्याय का सारांश दोहराएं और फिर प्रयास करें।'}`;
-
-        quizResult.innerHTML = isHindi ? messageHi : messageEn;
-
-        const explanationHTML = Object.keys(answerKey).map((questionName, index) => {
-            const picked = document.querySelector(`input[name="${questionName}"]:checked`);
-            const isCorrect = picked && picked.value === answerKey[questionName];
-            const statusEn = isCorrect ? 'Correct' : 'Needs Revision';
-            const statusHi = isCorrect ? 'सही' : 'दोबारा देखें';
-            const whyText = isHindi ? explanations[questionName].hi : explanations[questionName].en;
-
-            return `
-                <div class="quiz-explanation">
-                    <strong>${isHindi ? 'प्रश्न' : 'Question'} ${index + 1}:</strong>
-                    ${isHindi ? statusHi : statusEn}
-                    <br>
-                    ${whyText}
-                </div>
-            `;
-        }).join('');
-
-        quizExplanations.innerHTML = explanationHTML;
-    });
+    }
 
     const updateControlLanguage = () => {
         const isHindi = bodyElement.getAttribute('data-lang') === 'hi';
-        printWorksheetButton.textContent = isHindi ? 'वर्कशीट प्रिंट करें' : 'Print Worksheet';
+        if (printWorksheetButton) {
+            printWorksheetButton.textContent = isHindi ? 'वर्कशीट प्रिंट करें' : 'Print Worksheet';
+        }
     };
 
     langButtons.forEach((button) => {
