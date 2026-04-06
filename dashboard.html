@@ -21,13 +21,53 @@
             font-family: 'Poppins', sans-serif;
             color: white;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: -20% -10% auto -10%;
+            height: 70vh;
+            background:
+                radial-gradient(circle at 20% 40%, rgba(127, 211, 255, 0.2) 0%, rgba(127, 211, 255, 0) 55%),
+                radial-gradient(circle at 80% 20%, rgba(255, 160, 90, 0.18) 0%, rgba(255, 160, 90, 0) 50%),
+                radial-gradient(circle at 55% 65%, rgba(163, 122, 255, 0.2) 0%, rgba(163, 122, 255, 0) 52%);
+            filter: blur(14px);
+            pointer-events: none;
+            z-index: 0;
+            animation: nebulaShift 16s ease-in-out infinite alternate;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: radial-gradient(circle at center, black 38%, transparent 95%);
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: 0;
         }
 
         /* --- BACKGROUND DECORATION --- */
         .stars {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://www.transparenttextures.com/patterns/stardust.png');
-            opacity: 0.3; pointer-events: none;
+            opacity: 0.33;
+            pointer-events: none;
+            z-index: 0;
+            animation: starTwinkle 8s ease-in-out infinite alternate;
+        }
+
+        header,
+        .container,
+        .birbal-widget {
+            position: relative;
+            z-index: 1;
         }
 
         /* --- HEADER --- */
@@ -133,6 +173,16 @@
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes starTwinkle {
+            0% { opacity: 0.24; transform: scale(1); }
+            100% { opacity: 0.42; transform: scale(1.02); }
+        }
+
+        @keyframes nebulaShift {
+            0% { transform: translateY(-10px) scale(1); }
+            100% { transform: translateY(12px) scale(1.05); }
         }
 
         /* --- MOBILE VIEW --- */
