@@ -92,6 +92,32 @@
         }
         .back-link:hover { opacity: 1; }
 
+        .back-dashboard-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #0b1f12;
+            font-weight: 700;
+            font-size: 0.82rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            padding: 9px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.62);
+            background: linear-gradient(135deg, #b9f2bc, #8be58f);
+            box-shadow: 0 8px 22px rgba(139, 229, 143, 0.4), 0 0 22px rgba(139, 229, 143, 0.5);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-left: 10px;
+            margin-bottom: 30px;
+            vertical-align: middle;
+        }
+
+        .back-dashboard-btn:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 12px 28px rgba(139, 229, 143, 0.5), 0 0 30px rgba(139, 229, 143, 0.65);
+        }
+
         /* Chapter banner */
         .chapter-banner {
             text-align: center;
@@ -169,6 +195,150 @@
             background: linear-gradient(135deg, rgba(139, 229, 143, 0.35), rgba(85, 170, 95, 0.32));
             color: #f4fff5;
             box-shadow: 0 0 0 1px rgba(139, 229, 143, 0.45);
+        }
+
+        .study-tabs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin: 8px 0 18px;
+        }
+
+        .study-tab {
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 10px 12px;
+            font-weight: 700;
+            color: #f4fff5;
+            cursor: pointer;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+            font-size: 0.84rem;
+            letter-spacing: 0.03em;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .study-tab:hover {
+            transform: translateY(-2px);
+        }
+
+        .study-tab.active {
+            border-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18), 0 8px 18px rgba(0, 0, 0, 0.28);
+        }
+
+        .study-tab.tab-summary { background: linear-gradient(135deg, rgba(91, 166, 255, 0.45), rgba(35, 95, 182, 0.45)); }
+        .study-tab.tab-exam { background: linear-gradient(135deg, rgba(255, 174, 84, 0.45), rgba(187, 103, 23, 0.45)); }
+        .study-tab.tab-ncert { background: linear-gradient(135deg, rgba(170, 126, 255, 0.45), rgba(96, 58, 168, 0.45)); }
+        .study-tab.tab-activity { background: linear-gradient(135deg, rgba(112, 220, 130, 0.45), rgba(35, 121, 51, 0.45)); }
+        .study-tab.tab-flash { background: linear-gradient(135deg, rgba(255, 126, 162, 0.45), rgba(161, 42, 90, 0.45)); }
+        .study-tab.tab-quiz { background: linear-gradient(135deg, rgba(255, 96, 96, 0.45), rgba(171, 35, 35, 0.45)); }
+
+        .study-panel {
+            display: none;
+            margin-top: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .study-panel.active {
+            display: block;
+            box-shadow: 0 0 0 1px rgba(139, 229, 143, 0.24), 0 12px 26px rgba(0, 0, 0, 0.25);
+        }
+
+        .study-panel h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .flash-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .flash-card {
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 12px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .flash-card strong {
+            display: block;
+            color: #ffdca8;
+            margin-bottom: 6px;
+        }
+
+        .quiz12-form {
+            display: grid;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .quiz12-question {
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 12px;
+            padding: 12px;
+            background: rgba(132, 183, 255, 0.08);
+        }
+
+        .quiz12-question h4 {
+            margin: 0 0 8px;
+            color: #d6e8ff;
+            font-size: 0.92rem;
+        }
+
+        .quiz12-question label {
+            display: block;
+            margin: 5px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #e6f3ff;
+            cursor: pointer;
+        }
+
+        .quiz12-submit {
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, rgba(215, 70, 70, 0.9), rgba(146, 28, 28, 0.9));
+            width: fit-content;
+            cursor: pointer;
+        }
+
+        .quiz12-result {
+            display: none;
+            margin-top: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.26);
+            border-radius: 10px;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #f3fbff;
+            font-size: 0.92rem;
+        }
+
+        .score12-track {
+            margin-top: 10px;
+            height: 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            background: rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+        }
+
+        .score12-fill {
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #ff7ea2, #8be58f);
+            transition: width 0.35s ease;
         }
 
         .chapter-icon {
@@ -1330,6 +1500,7 @@
 <main class="page">
 
     <a class="back-link" href="geography_chapters.html">&#8592; Back to Resources</a>
+    <a class="back-dashboard-btn" href="dashboard.html">&#x2728; Back to Dashboard</a>
 
     <div class="chapter-banner">
         <div class="chapter-glow-box">
@@ -1343,6 +1514,92 @@
         <button type="button" class="lang-btn active" data-lang="en">English</button>
         <button type="button" class="lang-btn" data-lang="hi">हिंदी</button>
         <button type="button" class="tool-btn" id="printWorksheetBtn">Print Worksheet</button>
+    </div>
+
+    <div class="section-card" id="learningHubSection">
+        <div class="section-header">
+            <span class="s-icon">&#x1F4DA;</span>
+            <h2>Learning Hub Tabs</h2>
+        </div>
+        <div class="section-body">
+            <div class="study-tabs" role="tablist" aria-label="Natural resources learning tabs">
+                <button class="study-tab tab-summary active" type="button" data-tab="summaryPanel">Chapter Summary</button>
+                <button class="study-tab tab-exam" type="button" data-tab="examPanel">Chapter Examination</button>
+                <button class="study-tab tab-ncert" type="button" data-tab="ncertPanel">NCERT Solutions</button>
+                <button class="study-tab tab-activity" type="button" data-tab="activityPanel">Learn &amp; Fun Activities</button>
+                <button class="study-tab tab-flash" type="button" data-tab="flashPanel">Flash Cards</button>
+                <button class="study-tab tab-quiz" type="button" data-tab="quizPanel12">Auto-Check Quiz</button>
+            </div>
+
+            <div class="study-panel active" id="summaryPanel">
+                <h3>Chapter Summary</h3>
+                <p>Natural resources become useful resources when humans can access, understand, and responsibly use them. They support life, provide materials, and power development. Sustainable use balances present needs with future generations.</p>
+            </div>
+
+            <div class="study-panel" id="examPanel">
+                <h3>Chapter Examination</h3>
+                <ol>
+                    <li>Define natural resources with two examples.</li>
+                    <li>Differentiate renewable and non-renewable resources.</li>
+                    <li>Why is groundwater conservation important?</li>
+                    <li>Give two examples of sustainable practices in your area.</li>
+                    <li>How can technology improve resource management?</li>
+                </ol>
+            </div>
+
+            <div class="study-panel" id="ncertPanel">
+                <h3>NCERT Solutions (Quick Pointers)</h3>
+                <ul class="key-list">
+                    <li>Nature becomes a resource when utility and accessibility combine with human need.</li>
+                    <li>Renewables regenerate naturally; non-renewables form over very long periods.</li>
+                    <li>Conservation requires community participation, policy support, and scientific planning.</li>
+                    <li>Overuse causes pollution, biodiversity loss, and long-term economic stress.</li>
+                </ul>
+            </div>
+
+            <div class="study-panel" id="activityPanel">
+                <h3>Learn &amp; Fun Activities</h3>
+                <ul class="key-list">
+                    <li>Create a one-week home water usage tracker and suggest reduction steps.</li>
+                    <li>Make a recyclable-resource collage from newspaper and label categories.</li>
+                    <li>Run a class debate: Development vs Sustainable Development.</li>
+                    <li>Design a "Save Resources" poster for your neighborhood.</li>
+                </ul>
+            </div>
+
+            <div class="study-panel" id="flashPanel">
+                <h3>Flash Cards</h3>
+                <div class="flash-grid">
+                    <div class="flash-card"><strong>Renewable</strong>Resources that replenish naturally in a shorter time.</div>
+                    <div class="flash-card"><strong>Non-Renewable</strong>Resources formed over millions of years; limited stock.</div>
+                    <div class="flash-card"><strong>Stewardship</strong>Responsible use and protection of natural systems.</div>
+                    <div class="flash-card"><strong>Sustainable Use</strong>Meeting needs today without harming future generations.</div>
+                    <div class="flash-card"><strong>Conservation</strong>Planned protection and careful management of resources.</div>
+                    <div class="flash-card"><strong>Biodiversity</strong>Variety of life forms supporting ecosystem balance.</div>
+                </div>
+            </div>
+
+            <div class="study-panel" id="quizPanel12">
+                <h3>Auto-Check Quiz (12 MCQs)</h3>
+                <form class="quiz12-form" id="resourceQuiz12">
+                    <div class="quiz12-question"><h4>1. Natural resources become resources when they are:</h4><label><input type="radio" name="t1" value="a"> Seen in nature</label><label><input type="radio" name="t1" value="b"> Used to satisfy human needs</label><label><input type="radio" name="t1" value="c"> Hidden underground</label></div>
+                    <div class="quiz12-question"><h4>2. Which is non-renewable?</h4><label><input type="radio" name="t2" value="a"> Wind</label><label><input type="radio" name="t2" value="b"> Sunlight</label><label><input type="radio" name="t2" value="c"> Petroleum</label></div>
+                    <div class="quiz12-question"><h4>3. Which is a life-supporting resource?</h4><label><input type="radio" name="t3" value="a"> Soil</label><label><input type="radio" name="t3" value="b"> Plastic</label><label><input type="radio" name="t3" value="c"> Cement</label></div>
+                    <div class="quiz12-question"><h4>4. Sustainable development means:</h4><label><input type="radio" name="t4" value="a"> Maximum use today</label><label><input type="radio" name="t4" value="b"> No use of technology</label><label><input type="radio" name="t4" value="c"> Balance of present and future needs</label></div>
+                    <div class="quiz12-question"><h4>5. Coal takes very long to form, so it is:</h4><label><input type="radio" name="t5" value="a"> Renewable</label><label><input type="radio" name="t5" value="b"> Non-renewable</label><label><input type="radio" name="t5" value="c"> Biotic only</label></div>
+                    <div class="quiz12-question"><h4>6. Which helps conserve water?</h4><label><input type="radio" name="t6" value="a"> Rainwater harvesting</label><label><input type="radio" name="t6" value="b"> Open taps</label><label><input type="radio" name="t6" value="c"> Wasteful irrigation</label></div>
+                    <div class="quiz12-question"><h4>7. Biodiversity loss is mainly linked with:</h4><label><input type="radio" name="t7" value="a"> Responsible use</label><label><input type="radio" name="t7" value="b"> Overexploitation and pollution</label><label><input type="radio" name="t7" value="c"> Afforestation</label></div>
+                    <div class="quiz12-question"><h4>8. Which is an energy resource?</h4><label><input type="radio" name="t8" value="a"> Wind</label><label><input type="radio" name="t8" value="b"> Cotton</label><label><input type="radio" name="t8" value="c"> Iron ore</label></div>
+                    <div class="quiz12-question"><h4>9. Stewardship means:</h4><label><input type="radio" name="t9" value="a"> Ignoring future needs</label><label><input type="radio" name="t9" value="b"> Using all resources quickly</label><label><input type="radio" name="t9" value="c"> Caring and managing resources responsibly</label></div>
+                    <div class="quiz12-question"><h4>10. A key criterion for resource use is:</h4><label><input type="radio" name="t10" value="a"> Cultural acceptability</label><label><input type="radio" name="t10" value="b"> Random extraction</label><label><input type="radio" name="t10" value="c"> Unlimited availability</label></div>
+                    <div class="quiz12-question"><h4>11. Which is a material resource?</h4><label><input type="radio" name="t11" value="a"> Wood</label><label><input type="radio" name="t11" value="b"> Sunlight</label><label><input type="radio" name="t11" value="c"> Wind</label></div>
+                    <div class="quiz12-question"><h4>12. Best way to reduce resource stress is:</h4><label><input type="radio" name="t12" value="a"> Reuse, recycle, regulate use</label><label><input type="radio" name="t12" value="b"> Ignore local practices</label><label><input type="radio" name="t12" value="c"> Use and throw rapidly</label></div>
+                    <button type="button" class="quiz12-submit" id="checkQuiz12Btn">Check 12-Question Quiz</button>
+                </form>
+                <div class="quiz12-result" id="quiz12Result" aria-live="polite"></div>
+                <div class="score12-track"><div class="score12-fill" id="score12Fill"></div></div>
+            </div>
+        </div>
     </div>
 
     <div class="sections">
@@ -1869,6 +2126,61 @@
     });
 
     updateControlLanguage();
+
+    const studyTabs = document.querySelectorAll('.study-tab');
+    const studyPanels = document.querySelectorAll('.study-panel');
+
+    studyTabs.forEach((button) => {
+        button.addEventListener('click', () => {
+            const targetId = button.getAttribute('data-tab');
+            studyTabs.forEach((tab) => tab.classList.remove('active'));
+            studyPanels.forEach((panel) => panel.classList.remove('active'));
+            button.classList.add('active');
+            const targetPanel = document.getElementById(targetId);
+            if (targetPanel) targetPanel.classList.add('active');
+        });
+    });
+
+    const quiz12Button = document.getElementById('checkQuiz12Btn');
+    const quiz12Result = document.getElementById('quiz12Result');
+    const score12Fill = document.getElementById('score12Fill');
+
+    if (quiz12Button) {
+        quiz12Button.addEventListener('click', () => {
+            const answerKey12 = {
+                t1: 'b', t2: 'c', t3: 'a', t4: 'c', t5: 'b', t6: 'a',
+                t7: 'b', t8: 'a', t9: 'c', t10: 'a', t11: 'a', t12: 'a'
+            };
+
+            let correct = 0;
+            let answered = 0;
+            Object.keys(answerKey12).forEach((name) => {
+                const picked = document.querySelector(`input[name="${name}"]:checked`);
+                if (picked) {
+                    answered += 1;
+                    if (picked.value === answerKey12[name]) correct += 1;
+                }
+            });
+
+            const total = Object.keys(answerKey12).length;
+            const scorePercent = Math.round((correct / total) * 100);
+            score12Fill.style.width = `${scorePercent}%`;
+            quiz12Result.style.display = 'block';
+
+            if (answered < total) {
+                quiz12Result.textContent = `Please answer all ${total} questions. You answered ${answered}.`;
+                return;
+            }
+
+            if (scorePercent >= 85) {
+                quiz12Result.textContent = `Excellent! You scored ${correct}/${total} (${scorePercent}%).`;
+            } else if (scorePercent >= 60) {
+                quiz12Result.textContent = `Good work. You scored ${correct}/${total} (${scorePercent}%). Review a few concepts and retry.`;
+            } else {
+                quiz12Result.textContent = `You scored ${correct}/${total} (${scorePercent}%). Revisit chapter summary and NCERT solutions tab, then try again.`;
+            }
+        });
+    }
 </script>
 
 </body>

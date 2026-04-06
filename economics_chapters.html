@@ -116,6 +116,30 @@
             flex: 1;
         }
 
+        .back-dashboard-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #1a0f2e;
+            font-weight: 700;
+            font-size: 0.86rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            background: linear-gradient(135deg, #f0d3ff, #e4b8ff);
+            box-shadow: 0 8px 22px rgba(228, 184, 255, 0.4), 0 0 22px rgba(228, 184, 255, 0.5);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-bottom: 16px;
+        }
+
+        .back-dashboard-btn:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 12px 28px rgba(228, 184, 255, 0.5), 0 0 30px rgba(228, 184, 255, 0.65);
+        }
+
         .enter-btn {
             display: inline-flex;
             align-items: center;
@@ -169,6 +193,7 @@
 <body>
 
 <main class="page">
+    <a class="back-dashboard-btn" href="dashboard.html">&#8592; Back to Dashboard</a>
     <h1>Development</h1>
     <p class="subtitle">Explore the chapter for this section.</p>
 
