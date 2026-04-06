@@ -1,6 +1,21 @@
 (function initChatbotWidget() {
   const CHATBOT_TEXT = 'Jahanpanah ! Ask your question and I shall answer with wit.';
 
+  function ensureGreeting(messageList) {
+    if (!messageList) return;
+
+    const alreadyPresent = Array.from(messageList.querySelectorAll('.message.bot'))
+      .some((bubble) => bubble.textContent.trim() === CHATBOT_TEXT);
+
+    if (alreadyPresent) return;
+
+    const bubble = document.createElement('div');
+    bubble.className = 'message bot chatbot-click-greeting';
+    bubble.textContent = CHATBOT_TEXT;
+    messageList.appendChild(bubble);
+    messageList.scrollTop = messageList.scrollHeight;
+  }
+
   function getOrCreateHint() {
     let hint = document.querySelector('.chatbot-hint');
     if (!hint) {
@@ -40,13 +55,7 @@
 
     panel.classList.add('open');
     const messageList = document.getElementById('messageList');
-    if (messageList && !messageList.querySelector('.chatbot-click-greeting')) {
-      const bubble = document.createElement('div');
-      bubble.className = 'message bot chatbot-click-greeting';
-      bubble.textContent = CHATBOT_TEXT;
-      messageList.appendChild(bubble);
-      messageList.scrollTop = messageList.scrollHeight;
-    }
+    ensureGreeting(messageList);
 
     const input = document.getElementById('birbalInput');
     if (input) input.focus();
@@ -75,5 +84,10 @@
     document.addEventListener('DOMContentLoaded', wireButtons);
   } else {
     wireButtons();
+  }
+
+  const query = new URLSearchParams(window.location.search);
+  if (query.get('openBirbal') === '1') {
+    ensureGreeting(document.getElementById('messageList'));
   }
 })();
